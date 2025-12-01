@@ -1,0 +1,38 @@
+name: CMake - Google Tests
+
+on:
+  push:
+    branches: [ run-tests ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y cmake ninja-build g++ # or clang if you prefer
+
+      - name: Configure CMake
+        run: |
+          cmake -S . -B build \
+                -G Ninja \
+                -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build
+        run: |
+          cmake --build build --config Release
+
+      - name: Run Google Tests
+        run: |
+          # Option 1: run the test binary directly
+          ./build/googletest/Google_Tests_run
+
+          # Option 2 (if you add enable_testing()/add_test() in CMake): use ctest
+          # ctest --test-dir build --output-on-failure
