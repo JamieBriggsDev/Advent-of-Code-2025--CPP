@@ -6,7 +6,7 @@
 #define AOC2025_DIAL_H
 #include <cstdint>
 
-namespace Day1 {
+namespace D1 {
 
   class Dial {
     int16_t value_;

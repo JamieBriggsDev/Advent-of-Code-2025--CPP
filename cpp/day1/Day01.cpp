@@ -18,18 +18,18 @@ using namespace std;
 
 namespace solutions {
   string Day01::solvePartOne(const helper::SolutionInput *input) {
-    auto dial = make_unique<Day1::Dial>(50);
+    auto dial = make_unique<D1::Dial>(50);
     moveDial(input, dial);
     return to_string(dial->getTotalTimesDialEndsOnZero());
   }
 
   string Day01::solvePartTwo(const helper::SolutionInput *input) {
-    auto dial = make_unique<Day1::Dial>(50);
+    auto dial = make_unique<D1::Dial>(50);
     moveDial(input, dial);
     return to_string(dial->getTotalTimesDialTouchesZero());
   }
 
-  void Day01::moveDial(const helper::SolutionInput *input, unique_ptr<Day1::Dial> &dial) {
+  void Day01::moveDial(const helper::SolutionInput *input, unique_ptr<D1::Dial> &dial) {
     const regex listsRegex("([RL])([0-9]+)");
     auto dialValues = std::vector<int16_t>();
 

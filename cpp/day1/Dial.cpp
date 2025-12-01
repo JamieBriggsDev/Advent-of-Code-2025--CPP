@@ -7,7 +7,7 @@
 #include <iostream>
 #include <ostream>
 
-namespace Day1 {
+namespace D1 {
   void Dial::moveDial(const int16_t steps) {
     int16_t currentValue = value_;
     int16_t remainingSteps = steps;

@@ -12,7 +12,7 @@
 
 using namespace solutions;
 
-class ExampleTests : public ::testing::Test {
+class Example_Tests : public ::testing::Test {
 public:
   static std::filesystem::path testDir() {
     using std::filesystem::path;
@@ -27,7 +27,7 @@ public:
   void SetUp() override {}
 };
 
-TEST_F(ExampleTests, Day1_Part1) {
+TEST_F(Example_Tests, Day1_Part1) {
   // Given
   const auto input = getTestInput("testData/day1.txt");
   Day01 day;
@@ -37,7 +37,7 @@ TEST_F(ExampleTests, Day1_Part1) {
   EXPECT_EQ(result, "3");
 }
 
-TEST_F(ExampleTests, Day1_Part2) {
+TEST_F(Example_Tests, Day1_Part2) {
   // Given
   const auto input = getTestInput("testData/day1.txt");
   Day01 day;

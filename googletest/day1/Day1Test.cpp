@@ -8,7 +8,7 @@
 #include "../../cpp/day1/Dial.h"
 
 
-TEST(Day1Tests, ShouldMoveDialRight) {
+TEST(Day01_Tests, ShouldMoveDialRight) {
   // Given
   auto dial = std::make_unique<solutions::Day01>();
   auto listOfInput = std::vector<std::string>{"R50"};
@@ -19,7 +19,7 @@ TEST(Day1Tests, ShouldMoveDialRight) {
   EXPECT_EQ(result, "1");
 }
 
-TEST(Day1Tests, ShouldMoveDialLeft) {
+TEST(Day01_Tests, ShouldMoveDialLeft) {
   // Given
   auto dial = std::make_unique<solutions::Day01>();
   auto listOfInput = std::vector<std::string>{"L50"};
@@ -31,7 +31,7 @@ TEST(Day1Tests, ShouldMoveDialLeft) {
 }
 
 
-TEST(Day1Tests, ShouldHitZeroMultiple) {
+TEST(Day01_Tests, ShouldHitZeroMultiple) {
   // Given
   auto dial = std::make_unique<solutions::Day01>();
   auto listOfInput = std::vector<std::string>{"L50", "R200", "L200"};
@@ -42,7 +42,7 @@ TEST(Day1Tests, ShouldHitZeroMultiple) {
   EXPECT_EQ(result, "3");
 }
 
-TEST(Day1Tests, PartTwoTests) {
+TEST(Day01_Tests, PartTwoTests) {
   // Given
   auto dial = std::make_unique<solutions::Day01>();
   auto listOfInput = std::vector<std::string>{"L50", "R200", "L200"};
@@ -53,7 +53,7 @@ TEST(Day1Tests, PartTwoTests) {
   EXPECT_EQ(result, "5");
 }
 
-TEST(Day1Tests, PartTwoTestsLargeExample) {
+TEST(Day01_Tests, PartTwoTestsLargeExample) {
   // Given
   auto dial = std::make_unique<solutions::Day01>();
   auto listOfInput = std::vector<std::string>{"L1000"};
@@ -64,7 +64,7 @@ TEST(Day1Tests, PartTwoTestsLargeExample) {
   EXPECT_EQ(result, "10");
 }
 
-TEST(Day1Tests, PartTwoMultipleMovements) {
+TEST(Day01_Tests, PartTwoMultipleMovements) {
   // Given
   auto dial = std::make_unique<solutions::Day01>();
   auto listOfInput = std::vector<std::string>{"L50", "R100", "L200"};

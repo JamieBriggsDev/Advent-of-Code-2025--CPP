@@ -25,8 +25,8 @@ add_executable(Google_Tests_run
         ../cpp/day1/Day01.cpp
         day1/DialTest.cpp
         day1/Day1Test.cpp
-        example/ExampleTests.cpp
-        helper/SolutionHelperTests.cpp
+        example/Example_Tests.cpp
+        helper/SolutionInputTests.cpp
         testHelper/InputUtils.h
         testHelper/InputUtils.cpp
 )

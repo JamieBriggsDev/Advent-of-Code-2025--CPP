@@ -17,9 +17,9 @@ using namespace helper;
 namespace solutions {
   class Day01 final : public Day {
   public:
-    std::string solvePartOne(const helper::SolutionInput *input) override;
-    static void moveDial(const helper::SolutionInput *input, unique_ptr<Day1::Dial> &dial);
-    std::string solvePartTwo(const helper::SolutionInput *input) override;
+    std::string solvePartOne(const SolutionInput *input) override;
+    static void moveDial(const SolutionInput *input, unique_ptr<D1::Dial> &dial);
+    std::string solvePartTwo(const SolutionInput *input) override;
   };
 } // namespace solutions
 

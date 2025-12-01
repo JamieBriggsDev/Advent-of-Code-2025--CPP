@@ -9,7 +9,7 @@
 
 using namespace std;
 
-TEST(SolutionInputTests, ShouldSplitInput) {
+TEST(SolutionInput_Tests, ShouldSplitInput) {
   // Given
   string rawInput =
     "row 1\n"
