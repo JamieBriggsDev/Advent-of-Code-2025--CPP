@@ -30,9 +30,9 @@ public:
 TEST_F(ExampleTests, Day1_Part1) {
   // Given
   const auto input = getTestInput("testData/day1.txt");
-  constexpr auto day = std::unique_ptr<Day01>();
+  Day01 day;
   // When
-  const auto result = day->solvePartOne(input);
+  const auto result = day.solvePartOne(input);
   // Then
   EXPECT_EQ(result, "3");
 }
@@ -40,9 +40,9 @@ TEST_F(ExampleTests, Day1_Part1) {
 TEST_F(ExampleTests, Day1_Part2) {
   // Given
   const auto input = getTestInput("testData/day1.txt");
-  constexpr auto day = std::unique_ptr<Day01>();
+  Day01 day;
   // When
-  const auto result = day->solvePartTwo(input);
+  const auto result = day.solvePartTwo(input);
   // Then
   EXPECT_EQ(result, "6");
 }
