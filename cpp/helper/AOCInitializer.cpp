@@ -8,6 +8,7 @@
 #include <stdexcept>
 
 #include "../day1/Day01.h"
+#include "../day2/Day02.h"
 #include "FileReader.h"
 
 namespace helper {
@@ -16,6 +17,9 @@ namespace helper {
     switch (dayNumber) {
       case 1:
         day = new solutions::Day01();
+        break;
+      case 2:
+        day = new solutions::Day02();
         break;
       default:
         printf("Unknown day passed %d", dayNumber);

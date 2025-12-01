@@ -29,6 +29,8 @@ add_executable(Google_Tests_run
         helper/SolutionInputTests.cpp
         testHelper/InputUtils.h
         testHelper/InputUtils.cpp
+        ../cpp/day2/Day02.h
+        ../cpp/day2/Day02.cpp
 )
 
 # Set optimization flags for Release configuration

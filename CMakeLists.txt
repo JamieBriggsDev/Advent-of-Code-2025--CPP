@@ -19,6 +19,8 @@ add_executable(aoc2025 main.cpp
         cpp/core/HashConfig.h
         cpp/day1/Dial.cpp
         cpp/day1/Dial.h
+        cpp/day2/Day02.h
+        cpp/day2/Day02.cpp
 )
 
 add_subdirectory(googletest)
