@@ -2,7 +2,7 @@ name: CMake - Google Tests
 
 on:
   push:
-    branches: [ run-tests ]
+    branches: [ main ]
   pull_request:
     branches: [ main ]
 
