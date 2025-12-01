@@ -32,7 +32,23 @@ jobs:
       - name: Run Google Tests
         run: |
           # Option 1: run the test binary directly
-          ./build/googletest/Google_Tests_run
+          ./build/googletest/Google_Tests_run\
+            --gtest_output=xml:./build/test-results/gtest-results.xml
 
           # Option 2 (if you add enable_testing()/add_test() in CMake): use ctest
           # ctest --test-dir build --output-on-failure
+
+      - name: Upload test results
+        if: always()  # still upload if tests fail
+        uses: actions/upload-artifact@v4
+        with:
+          name: gtest-results
+          path: build/test-results
+
+      - name: Publish Test Report
+        if: always()
+        uses: dorny/test-reporter@v1
+        with:
+          name: Google Tests
+          path: build/test-results/**/*.xml
+          reporter: jest-junit   # JUnit-compatible parser
