@@ -13,13 +13,7 @@ add_executable(aoc2025 main.cpp
         cpp/Day.h
         cpp/helper/AOCInitializer.cpp
         cpp/helper/AOCInitializer.h
-        cpp/helper/StringUtils.cpp
-        cpp/helper/StringUtils.h
         cpp/core/Pair.h
-        cpp/core/WordSearchRow.cpp
-        cpp/core/WordSearchRow.h
-        cpp/core/WordSearchGrid.h
-        cpp/core/WordSearchGrid.cpp
         cpp/core/AocException.cpp
         cpp/core/AocException.h
         cpp/core/HashConfig.h

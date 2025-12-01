@@ -16,7 +16,6 @@
 
 using namespace std;
 
-
 namespace solutions {
   string Day01::solvePartOne(const helper::SolutionInput *input) {
     auto dial = make_unique<Day1::Dial>(50);
@@ -30,7 +29,6 @@ namespace solutions {
     return to_string(dial->getTotalTimesDialTouchesZero());
   }
 
-
   void Day01::moveDial(const helper::SolutionInput *input, unique_ptr<Day1::Dial> &dial) {
     const regex listsRegex("([RL])([0-9]+)");
     auto dialValues = std::vector<int16_t>();
@@ -39,10 +37,7 @@ namespace solutions {
       smatch m;
       regex_search(row, m, listsRegex);
 
-      std::cout << "Processing row: " << row << std::endl;
-
-
-      char a = m[1].str()[0];
+      const char a = m[1].str()[0];
       int b = std::stoi(m[2]);
 
       // If left, make b negative

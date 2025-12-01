@@ -9,7 +9,7 @@
 
 using namespace std;
 
-TEST(SolutionInput_GetSplitTestInput_Tests, ShouldSplitInput) {
+TEST(SolutionInputTests, ShouldSplitInput) {
   // Given
   string rawInput =
     "row 1\n"
@@ -18,10 +18,10 @@ TEST(SolutionInput_GetSplitTestInput_Tests, ShouldSplitInput) {
     "row a\n"
     "row b\n"
   ;
-  vector<string> input = InputUtils::convertToVector(rawInput);
-  helper::SolutionInput* solutionInput = new helper::SolutionInput(input);
+  const auto input = InputUtils::convertToVector(rawInput);
+  const auto solutionInput = new helper::SolutionInput(input);
   // When
-  vector<vector<string>> result = solutionInput->getSplitTestInput("");
+  const auto result = solutionInput->getSplitTestInput("");
   // Then
   ASSERT_EQ(2, result.size());
   ASSERT_EQ("row 1", result[0][0]);

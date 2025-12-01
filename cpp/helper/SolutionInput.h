@@ -16,10 +16,10 @@ namespace helper {
     const vector<string> testInput;
 
   public:
-    SolutionInput(vector<string> input) : testInput(std::move(input)) {}
+    explicit SolutionInput(vector<string> input) : testInput(std::move(input)) {}
 
-    vector<string> getTestInput() const;
-    vector<vector<string>> getSplitTestInput(std::string rowToSplitBy) const;
+    [[nodiscard]] vector<string> getTestInput() const;
+    [[nodiscard]] vector<vector<string>> getSplitTestInput(std::string rowToSplitBy) const;
     [[nodiscard]] int getTotalRowsInInput() const { return testInput.size(); };
   };
 

@@ -46,7 +46,6 @@ Once the application is built, you can run the solutions via arguments passed.
 # In ./build directory created in previous step
 ./aoc2025 1 # Runs solutions from day 1
 ./aoc2025 9 # Runs solutions form day 9
-./aoc2025 1 --test # Runs solutions using test input within ../sample_input directory
 ```
 
 ## Project layout
