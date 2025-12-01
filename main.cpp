@@ -16,28 +16,32 @@ int main(int argc, char* argv[]) {
   const auto endInput = std::chrono::high_resolution_clock::now();
 
   // List time elapsed to load data
-  const auto inputDuration = std::chrono::duration_cast<std::chrono::milliseconds>(endInput - startInput);
-  printf("\nTook %lldms to load data\n\n", inputDuration.count());
+  const auto inputDuration =
+      std::chrono::duration_cast<std::chrono::milliseconds>(endInput - startInput);
+  std::cout << "\nTook " << inputDuration.count() << "ms to load data\n\n";
 
   // Solve part one of solution
-  printf("Solving Part 1 of solution...");
+  std::cout << "Solving Part 1 of solution...";
   const auto startPartOne = std::chrono::high_resolution_clock::now();
   const auto solve_part_one = day->solvePartOne(input);
   const auto endPartOne = std::chrono::high_resolution_clock::now();
-  const auto partOneDuration = std::chrono::duration_cast<std::chrono::milliseconds>(endPartOne - startPartOne);
-  printf("\nPart 1 solution: %s", solve_part_one.c_str());
-  printf("\nPart 1 took %lldms to solve", partOneDuration.count());
+  const auto partOneDuration =
+      std::chrono::duration_cast<std::chrono::milliseconds>(endPartOne - startPartOne);
+  std::cout << "\nPart 1 solution: " << solve_part_one;
+  std::cout << "\nPart 1 took " << partOneDuration.count() << "ms to solve";
 
-  cout << endl;
+  std::cout << std::endl;
 
   // Solve part two of solution
-  printf("\nSolving Part 2 of solution...");
+  std::cout << "\nSolving Part 2 of solution...";
   const auto startPartTwo = std::chrono::high_resolution_clock::now();
   const auto solve_part_two = day->solvePartTwo(input);
   const auto endPartTwo = std::chrono::high_resolution_clock::now();
-  const auto partTwoDuration = std::chrono::duration_cast<std::chrono::milliseconds>(endPartTwo - startPartTwo);
-  printf("\nPart 2 solution: %s", solve_part_two.c_str());
-  printf("\nPart 2 took %lldms to solve\n", partTwoDuration.count());
+  const auto partTwoDuration =
+      std::chrono::duration_cast<std::chrono::milliseconds>(endPartTwo - startPartTwo);
+  std::cout << "\nPart 2 solution: " << solve_part_two;
+  std::cout << "\nPart 2 took " << partTwoDuration.count() << "ms to solve\n";
+
   return 0;
 }
 
