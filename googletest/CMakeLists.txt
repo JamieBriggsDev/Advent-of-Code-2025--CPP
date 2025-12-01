@@ -18,6 +18,12 @@ add_executable(Google_Tests_run
         ../cpp/helper/StringUtils.h
         ../cpp/core/Pair.h
         core/PairTests.cpp
+        ../cpp/day1/Dial.cpp
+        ../cpp/day1/Dial.h
+        ../cpp/day1/Day01.h
+        ../cpp/day1/Day01.cpp
+        day1/DialTest.cpp
+        day1/Day1Test.cpp
 )
 
 # Set optimization flags for Release configuration

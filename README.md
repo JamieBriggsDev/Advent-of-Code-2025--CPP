@@ -7,6 +7,16 @@ are essentially core `helper` libraries which just help speed the process of wor
 file or code
 layout. This helps myself with focusing on working on the solution rather than project quality of life.
 
+## Puzzle inputs!
+
+You will have to include the test inputs yourself as they are not included in the repository:
+
+```shell
+mkdir input
+cd input
+touch day1.txt
+```
+
 ## Running the code
 
 ### CLion
@@ -44,7 +54,6 @@ Once the application is built, you can run the solutions via arguments passed.
 There are 4 main directories within this project:
 
 - `./cpp`: Contains source code for Advent of Code
-- `./input`: Contains `.txt` files which hold the input for each puzzle. They should be labelled as `dayX.txt`.
 - `./sample_input`: Similar to `./input`, but created based on the puzzle instructions or created by myself. They should
   be labelled as `dayX.txt`.
 - `./puzzle`: Contains markdown files which have the puzzles copied into them.
@@ -56,18 +65,18 @@ Advent of Code's website, but copying them and formatting to markdown helps me t
 which
 needs solving.
 
-| Day                         | Part One | Part Two |
-|-----------------------------|----------|----------|
-| [Day 1](puzzle%2FDay1.md)   |          |          | 
-| [Day 2](puzzle%2FDay2.md)   |          |          | 
-| [Day 3](puzzle%2FDay3.md)   |          |          | 
-| [Day 4](puzzle%2FDay4.md)   |          |          | 
-| [Day 5](puzzle%2FDay5.md)   |          |          | 
-| [Day 6](puzzle%2FDay6.md)   |          |          | 
-| [Day 7](puzzle%2FDay7.md)   |          |          | 
-| [Day 8](puzzle%2FDay8.md)   |          |          | 
-| [Day 9](puzzle%2FDay9.md)   |          |          | 
-| [Day 10](puzzle%2FDay10.md) |          |          | 
-| [Day 11](puzzle%2FDay11.md) |          |          | 
-| [Day12](puzzle/Day12.md)    |          |          | 
+| Day                                            | Part One | Part Two |
+|------------------------------------------------|----------|----------|
+| [Day 1](https://adventofcode.com/2025/day/1)   | ⭐️       | ⭐️       | 
+| [Day 2](https://adventofcode.com/2025/day/2)   |          |          | 
+| [Day 3](https://adventofcode.com/2025/day/3)   |          |          | 
+| [Day 4](https://adventofcode.com/2025/day/4)   |          |          | 
+| [Day 5](https://adventofcode.com/2025/day/5)   |          |          | 
+| [Day 6](https://adventofcode.com/2025/day/6)   |          |          | 
+| [Day 7](https://adventofcode.com/2025/day/7)   |          |          | 
+| [Day 8](https://adventofcode.com/2025/day/8)   |          |          | 
+| [Day 9](https://adventofcode.com/2025/day/9)   |          |          | 
+| [Day 10](https://adventofcode.com/2025/day/10) |          |          | 
+| [Day 11](https://adventofcode.com/2025/day/11) |          |          | 
+| [Day12](https://adventofcode.com/2025/day/12)  |          |          | 
 

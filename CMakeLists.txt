@@ -23,6 +23,8 @@ add_executable(aoc2025 main.cpp
         cpp/core/AocException.cpp
         cpp/core/AocException.h
         cpp/core/HashConfig.h
+        cpp/day1/Dial.cpp
+        cpp/day1/Dial.h
 )
 
 add_subdirectory(googletest)
