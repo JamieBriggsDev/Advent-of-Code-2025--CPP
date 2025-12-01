@@ -1,7 +1,7 @@
 #include <iostream>
 #include <chrono>
 
-#include "cpp/day.h"
+#include "cpp/Day.h"
 #include "cpp/helper/AOCInitializer.h"
 
 using namespace helper;
