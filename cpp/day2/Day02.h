@@ -1,26 +1,23 @@
 //
-// Created by Jamie Briggs on 01/12/2025.
+// Created by Jamie Briggs on 02/12/2025.
 //
 
-#ifndef DAY_01_H
-#define DAY_01_H
+#ifndef DAY_02_H
+#define DAY_02_H
 
-#include <memory>
 #include <string>
 
 #include "../Day.h"
 #include "../helper/SolutionInput.h"
-#include "Dial.h"
 
 using namespace helper;
 
 namespace solutions {
-  class Day01 final : public Day {
+  class Day02 final : public Day {
   public:
     std::string solvePartOne(const SolutionInput *input) override;
-    static void moveDial(const SolutionInput *input, unique_ptr<D1::Dial> &dial);
     std::string solvePartTwo(const SolutionInput *input) override;
   };
 } // namespace solutions
 
-#endif // DAY_01_H
+#endif // DAY_02_H

@@ -19,7 +19,7 @@ namespace helper {
     explicit SolutionInput(vector<string> input) : testInput(std::move(input)) {}
 
     [[nodiscard]] vector<string> getTestInput() const;
-    [[nodiscard]] vector<vector<string>> getSplitTestInput(std::string rowToSplitBy) const;
+    [[nodiscard]] vector<vector<string>> getSplitTestInput(const std::string& rowToSplitBy) const;
     [[nodiscard]] int getTotalRowsInInput() const { return testInput.size(); };
   };
 

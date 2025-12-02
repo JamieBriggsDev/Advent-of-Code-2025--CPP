@@ -25,10 +25,18 @@ add_executable(Google_Tests_run
         ../cpp/day1/Day01.cpp
         day1/DialTest.cpp
         day1/Day1Test.cpp
-        example/ExampleTests.cpp
-        helper/SolutionHelperTests.cpp
+        example/Example_Tests.cpp
+        helper/SolutionInputTests.cpp
         testHelper/InputUtils.h
         testHelper/InputUtils.cpp
+        ../cpp/day2/Day02.h
+        ../cpp/day2/Day02.cpp
+        ../cpp/day2/Range.cpp
+        ../cpp/day2/Range.h
+        day2/RangeTest.cpp
+        ../cpp/day2/InvalidIdFinder.cpp
+        ../cpp/day2/InvalidIdFinder.h
+        day2/InvalidIdFinderTest.cpp
 )
 
 # Set optimization flags for Release configuration

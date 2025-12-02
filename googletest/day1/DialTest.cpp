@@ -5,9 +5,9 @@
 #include "../../cpp/day1/Dial.h"
 #include <gtest/gtest.h>
 
-using namespace Day1;
+using namespace D1;
 
-TEST(DialTests, ShouldInitializeDial)
+TEST(Dial_Tests, ShouldInitializeDial)
 {
   // Given
   auto dial = std::make_unique<Dial>(0);
@@ -18,7 +18,7 @@ TEST(DialTests, ShouldInitializeDial)
 }
 
 
-TEST(DialTests, ShouldMoveRightWithoutLoop)
+TEST(Dial_Tests, ShouldMoveRightWithoutLoop)
 {
   // Given
   auto dial = std::make_unique<Dial>(0);
@@ -30,7 +30,7 @@ TEST(DialTests, ShouldMoveRightWithoutLoop)
 }
 
 
-TEST(DialTests, ShouldMoveLeftWithoutLoop)
+TEST(Dial_Tests, ShouldMoveLeftWithoutLoop)
 {
   // Given
   auto dial = std::make_unique<Dial>(50);
@@ -41,7 +41,7 @@ TEST(DialTests, ShouldMoveLeftWithoutLoop)
   EXPECT_EQ(result, 35);
 }
 
-TEST(DialTests, ShouldMoveBackTo99)
+TEST(Dial_Tests, ShouldMoveBackTo99)
 {
   // Given
   auto dial = std::make_unique<Dial>(0);
@@ -52,7 +52,7 @@ TEST(DialTests, ShouldMoveBackTo99)
   EXPECT_EQ(result, 99);
 }
 
-TEST(DialTests, ShouldMoveBackTo99Twice)
+TEST(Dial_Tests, ShouldMoveBackTo99Twice)
 {
   // Given
   auto dial = std::make_unique<Dial>(0);
@@ -63,7 +63,7 @@ TEST(DialTests, ShouldMoveBackTo99Twice)
   EXPECT_EQ(result, 99);
 }
 
-TEST(DialTests, ShouldMoveForwardTo0)
+TEST(Dial_Tests, ShouldMoveForwardTo0)
 {
   // Given
   auto dial = std::make_unique<Dial>(99);
@@ -74,7 +74,7 @@ TEST(DialTests, ShouldMoveForwardTo0)
   EXPECT_EQ(result, 0);
 }
 
-TEST(DialTests, ShouldMoveForwardTo0Twice)
+TEST(Dial_Tests, ShouldMoveForwardTo0Twice)
 {
   // Given
   auto dial = std::make_unique<Dial>(99);
@@ -85,7 +85,7 @@ TEST(DialTests, ShouldMoveForwardTo0Twice)
   EXPECT_EQ(result, 0);
 }
 
-TEST(DialTests, ShouldCountNumberOfTimesEndsOnZero)
+TEST(Dial_Tests, ShouldCountNumberOfTimesEndsOnZero)
 {
   // Given
   auto dial = std::make_unique<Dial>(50);
@@ -96,7 +96,7 @@ TEST(DialTests, ShouldCountNumberOfTimesEndsOnZero)
   EXPECT_EQ(result, 1);
 }
 
-TEST(DialTests, ShouldEndOnZero3Times)
+TEST(Dial_Tests, ShouldEndOnZero3Times)
 {
   // Given
   auto dial = std::make_unique<Dial>(50);
@@ -109,7 +109,7 @@ TEST(DialTests, ShouldEndOnZero3Times)
   EXPECT_EQ(result, 3);
 }
 
-TEST(DialTests, ShouldHitZeroMultipleTimesMovingRight)
+TEST(Dial_Tests, ShouldHitZeroMultipleTimesMovingRight)
 {
   // Given
   auto dial = std::make_unique<Dial>(50);
@@ -121,7 +121,7 @@ TEST(DialTests, ShouldHitZeroMultipleTimesMovingRight)
 }
 
 
-TEST(DialTests, ShouldHitZeroMultipleTimesMovingLeft)
+TEST(Dial_Tests, ShouldHitZeroMultipleTimesMovingLeft)
 {
   // Given
   auto dial = std::make_unique<Dial>(50);
