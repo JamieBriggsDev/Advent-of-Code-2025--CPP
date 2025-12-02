@@ -7,7 +7,7 @@
 using namespace helper;
 
 vector<string> SolutionInput::getTestInput() const { return this->testInput; }
-vector<vector<string>> SolutionInput::getSplitTestInput(std::string rowToSplitBy) const {
+vector<vector<string>> SolutionInput::getSplitTestInput(const std::string& rowToSplitBy) const {
 
   vector<vector<string>> splitInput;
   vector<string> currentChunk;

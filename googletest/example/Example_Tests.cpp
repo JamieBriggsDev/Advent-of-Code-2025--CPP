@@ -6,6 +6,7 @@
 
 
 #include "../../cpp/day1/Day01.h"
+#include "../../cpp/day2/Day02.h"
 #include "../../cpp/helper/AOCInitializer.h"
 #include "../../cpp/helper/SolutionInput.h"
 #include "gtest/gtest.h"
@@ -45,4 +46,25 @@ TEST_F(Example_Tests, Day1_Part2) {
   const auto result = day.solvePartTwo(input);
   // Then
   EXPECT_EQ(result, "6");
+}
+
+
+TEST_F(Example_Tests, Day2_Part1) {
+  // Given
+  const auto input = getTestInput("testData/day2.txt");
+  Day02 day;
+  // When
+  const auto result = day.solvePartOne(input);
+  // Then
+  EXPECT_EQ(result, "1227775554");
+}
+
+TEST_F(Example_Tests, Day2_Part2) {
+  // Given
+  const auto input = getTestInput("testData/day2.txt");
+  Day02 day;
+  // When
+  const auto result = day.solvePartTwo(input);
+  // Then
+  EXPECT_EQ(result, "4174379265");
 }

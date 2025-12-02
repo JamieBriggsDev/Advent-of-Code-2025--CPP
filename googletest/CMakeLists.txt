@@ -31,6 +31,12 @@ add_executable(Google_Tests_run
         testHelper/InputUtils.cpp
         ../cpp/day2/Day02.h
         ../cpp/day2/Day02.cpp
+        ../cpp/day2/Range.cpp
+        ../cpp/day2/Range.h
+        day2/RangeTest.cpp
+        ../cpp/day2/InvalidIdFinder.cpp
+        ../cpp/day2/InvalidIdFinder.h
+        day2/InvalidIdFinderTest.cpp
 )
 
 # Set optimization flags for Release configuration
