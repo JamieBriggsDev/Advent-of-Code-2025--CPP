@@ -80,3 +80,13 @@ TEST_F(Example_Tests, Day3_Part1) {
   // Then
   EXPECT_EQ(result, "357");
 }
+
+TEST_F(Example_Tests, Day3_Part2) {
+  // Given
+  const auto input = getTestInput("testData/day3.txt");
+  Day03 day;
+  // When
+  const auto result = day.solvePartTwo(input);
+  // Then
+  EXPECT_EQ(result, "3121910778619");
+}

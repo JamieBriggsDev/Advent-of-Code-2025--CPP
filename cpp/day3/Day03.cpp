@@ -22,7 +22,16 @@ namespace solutions {
   }
 
   string Day03::solvePartTwo(const helper::SolutionInput *input) {
-    return "";
+    std::vector<D3::BatteryBank> banks;
+    for (const auto &row: input->getTestInput()) {
+      banks.emplace_back(row);
+    }
+
+    long long result = 0;
+    for (const auto &bank: banks) {
+      result += bank.getLargestJoltage(12);
+    }
+    return std::to_string(result);
   }
 
 } // namespace solutions

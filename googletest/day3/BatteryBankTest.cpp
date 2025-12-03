@@ -42,3 +42,35 @@ TEST(BatteryBank_Test, GetLargestJoltage_ShouldFindFromFiveNumbers)
   ASSERT_EQ(bank.getLargestJoltage(), 94);
 }
 
+
+TEST(BatteryBank_Test, GetLargestJoltageWithParam3_ShouldFindFromFiveNumbers)
+{
+  // Given
+  std::string bankString = "19234";
+  // When
+  BatteryBank bank(bankString);
+  // Then
+  ASSERT_EQ(bank.getLargestJoltage(3), 934);
+}
+
+TEST(BatteryBank_Test, GetLargestJoltageWithParam12_ShouldFindFromLargeExample)
+{
+  // Given
+  std::string bankString = "987654321111111";
+  // When
+  BatteryBank bank(bankString);
+  // Then
+  ASSERT_EQ(bank.getLargestJoltage(12), 987654321111);
+}
+
+
+TEST(BatteryBank_Test, GetLargestJoltageWithParam12_ShouldFindFromLargeExampleTwo)
+{
+  // Given
+  std::string bankString = "234234234234278";
+  // When
+  BatteryBank bank(bankString);
+  // Then
+  ASSERT_EQ(bank.getLargestJoltage(12), 434234234278);
+}
+

@@ -10,12 +10,14 @@ namespace D3 {
 
   class BatteryBank {
     std::vector<int8_t> batteries_;
+    int8_t findIndexOfLargestNumberFromRange(int8_t startIdx, int8_t endIdx) const;
   public:
     BatteryBank(std::string batteries);
     [[nodiscard]] std::vector<int8_t> &getBatteries() {
       return batteries_;
     };
-    int32_t getLargestJoltage() const;
+    long long getLargestJoltage() const;
+    long long getLargestJoltage(int8_t totalBatteries) const;
   };
 
 } // namespace D3
