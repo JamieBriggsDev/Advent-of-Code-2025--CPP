@@ -5,6 +5,7 @@
 #ifndef AOC2025_BATTERY_H
 #define AOC2025_BATTERY_H
 #include <vector>
+#include <string>
 
 #ifdef __linux__
 #include <cstdint>
