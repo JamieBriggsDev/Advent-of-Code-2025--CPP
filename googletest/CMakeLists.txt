@@ -37,6 +37,11 @@ add_executable(Google_Tests_run
         ../cpp/day2/InvalidIdFinder.cpp
         ../cpp/day2/InvalidIdFinder.h
         day2/InvalidIdFinderTest.cpp
+        ../cpp/day3/Day03.cpp
+        ../cpp/day3/Day03.h
+        ../cpp/day3/BatteryBank.cpp
+        ../cpp/day3/BatteryBank.h
+        day3/BatteryBankTest.cpp
 )
 
 # Set optimization flags for Release configuration
