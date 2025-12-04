@@ -31,6 +31,8 @@ add_executable(aoc2025 main.cpp
         cpp/day3/BatteryBank.h
         cpp/day4/Day04.h
         cpp/day4/Day04.cpp
+        cpp/day4/PaperGrid.cpp
+        cpp/day4/PaperGrid.h
 )
 
 add_subdirectory(googletest)

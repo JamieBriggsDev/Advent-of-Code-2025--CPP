@@ -44,6 +44,9 @@ add_executable(Google_Tests_run
         day3/BatteryBankTest.cpp
         ../cpp/day4/Day04.h
         ../cpp/day4/Day04.cpp
+        ../cpp/day4/PaperGrid.cpp
+        ../cpp/day4/PaperGrid.h
+        day4/PaperGridTest.cpp
 )
 
 # Set optimization flags for Release configuration

@@ -99,5 +99,15 @@ TEST_F(Example_Tests, Day4_Part1) {
   // When
   const auto result = day.solvePartOne(input);
   // Then
-  EXPECT_EQ(result, "123");
+  EXPECT_EQ(result, "13");
+}
+
+TEST_F(Example_Tests, Day4_Part2) {
+  // Given
+  const auto input = getTestInput("testData/day4.txt");
+  Day04 day;
+  // When
+  const auto result = day.solvePartTwo(input);
+  // Then
+  EXPECT_EQ(result, "43");
 }
