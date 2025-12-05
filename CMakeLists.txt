@@ -21,8 +21,8 @@ add_executable(aoc2025 main.cpp
         cpp/day1/Dial.h
         cpp/day2/Day02.h
         cpp/day2/Day02.cpp
-        cpp/day2/Range.cpp
-        cpp/day2/Range.h
+        cpp/core/Range.cpp
+        cpp/core/Range.h
         cpp/day2/InvalidIdFinder.cpp
         cpp/day2/InvalidIdFinder.h
         cpp/day3/Day03.cpp
@@ -33,6 +33,8 @@ add_executable(aoc2025 main.cpp
         cpp/day4/Day04.cpp
         cpp/day4/PaperGrid.cpp
         cpp/day4/PaperGrid.h
+        cpp/day5/Day05.cpp
+        cpp/day5/Day05.h
 )
 
 add_subdirectory(googletest)

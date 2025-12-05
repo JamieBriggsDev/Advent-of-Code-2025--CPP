@@ -2,8 +2,8 @@
 // Created by Jamie Briggs on 01/12/2025.
 //
 
-#include "../../cpp/day2/Range.h"
 #include <gtest/gtest.h>
+#include "../../cpp/core/Range.h"
 
 #include "../../cpp/day2/InvalidIdFinder.h"
 

@@ -2,10 +2,10 @@
 // Created by Jamie Briggs on 01/12/2025.
 //
 
-#include "../../cpp/day2/Range.h"
 #include <gtest/gtest.h>
+#include "../../cpp/core/Range.h"
 
-using namespace D2;
+using namespace core;
 
 TEST(Range_Tests, ShouldInitializeRange)
 {
@@ -32,4 +32,28 @@ TEST(Range_Tests, ShouldReturnArrayOfAllRanges) {
   EXPECT_EQ(fullRange[3], 13);
   EXPECT_EQ(fullRange[4], 14);
   EXPECT_EQ(fullRange[5], 15);
+}
+
+TEST(Range_Tests, ShouldNotFitWithinRange) {
+  // Given
+  Range range(10, 15);
+  // When
+  // Then
+  EXPECT_FALSE(range.isInRange(9));
+  EXPECT_FALSE(range.isInRange(8));
+  EXPECT_FALSE(range.isInRange(16));
+  EXPECT_FALSE(range.isInRange(17));
+}
+
+TEST(Range_Tests, ShouldFitWithinRange) {
+  // Given
+  Range range(10, 15);
+  // When
+  // Then
+  EXPECT_TRUE(range.isInRange(10));
+  EXPECT_TRUE(range.isInRange(11));
+  EXPECT_TRUE(range.isInRange(12));
+  EXPECT_TRUE(range.isInRange(13));
+  EXPECT_TRUE(range.isInRange(14));
+  EXPECT_TRUE(range.isInRange(15));
 }

@@ -6,7 +6,7 @@
 #define AOC2025_RANGE_H
 #include <vector>
 
-namespace D2 {
+namespace core {
 
   class Range {
     const long startId, endId;
@@ -15,6 +15,7 @@ namespace D2 {
     long getStartId() const { return startId; }
     long getEndId() const { return endId; }
     std::vector<long> getFullRange() const;
+    bool isInRange(long id) const;
   };
 
 } // namespace D2
