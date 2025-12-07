@@ -12,8 +12,8 @@
 #include <regex>
 #include <sstream>
 
+#include "../core/Range.h"
 #include "InvalidIdFinder.h"
-#include "Range.h"
 
 
 using namespace std;
@@ -34,7 +34,7 @@ namespace solutions {
 
 
     const regex listsRegex("([0-9]+)-([0-9]+)");
-    vector<D2::Range> ranges;
+    vector<core::Range> ranges;
     // Get all ranges
     for (const auto &row: values) {
       smatch m;
@@ -42,7 +42,7 @@ namespace solutions {
 
       const long start = std::stol(m[1]);
       const long end = std::stol(m[2]);
-      D2::Range range(start, end);
+      core::Range range(start, end);
       ranges.push_back(range);
     }
 
@@ -76,7 +76,7 @@ namespace solutions {
 
 
     const regex listsRegex("([0-9]+)-([0-9]+)");
-    vector<D2::Range> ranges;
+    vector<core::Range> ranges;
     // Get all ranges
     for (const auto &row: values) {
       smatch m;
@@ -84,7 +84,7 @@ namespace solutions {
 
       const long start = std::stol(m[1]);
       const long end = std::stol(m[2]);
-      D2::Range range(start, end);
+      core::Range range(start, end);
       ranges.push_back(range);
     }
 
