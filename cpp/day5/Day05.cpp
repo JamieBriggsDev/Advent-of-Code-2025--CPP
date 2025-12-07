@@ -60,14 +60,34 @@ namespace solutions {
       ranges.push_back(range);
     }
 
-    // Check if second part of input fits in any range and add up total
-    std::unordered_set<long> uniqueFreshIngredientIds;
+    std::vector<core::Range> checkedRanges;
+    uint64_t totalIngredients{0};
+    int idx{0};
+    for (auto &range: ranges) {
+      idx++;
+      // Condense range if required, helps avoid duplicate IDs
+      for (const auto &checkedRange: checkedRanges) {
+        std::cout << "Checking range: " << range.toString() << " against " << checkedRange.toString() << std::endl;
+        range.compressUsingRange(checkedRange);
+      }
 
-    // TODO: Handle overlapping ingredients :(
-    long totalIngredients = 0;
-    for (const auto &range: ranges) {
-      long uniqueIngredients = range.getEndId() - range.getStartId() + 1;
-      totalIngredients += uniqueIngredients;
+      // Range can be invalid if it sits inside of an existing range, meaning
+      //  the ingredients have alredy been checked and we don't want to add
+      //  them again
+      if (!range.getInvalid()) {
+
+        // Add one as 10 - 10 = 0, despite there being 1 number shared between the two.
+        long long uniqueIngredients = range.getEndId() - range.getStartId() + 1;
+        totalIngredients += uniqueIngredients;
+        //std::cout << idx << "| " << range.toString() << "\t- Added " << uniqueIngredients
+         //         << "\t- Total ingredients: " << totalIngredients << std::endl;
+        std::cout << idx << "| " << totalIngredients << std::endl;
+        // NOT 364870513812957
+        // NOT 364870513812929 too high
+
+        // Check for any overlap (i.e. already tracked fresh ingredient IDs)
+        checkedRanges.emplace_back(range);
+      }
     }
     return std::to_string(totalIngredients);
   }

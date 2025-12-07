@@ -57,3 +57,50 @@ TEST(Range_Tests, ShouldFitWithinRange) {
   EXPECT_TRUE(range.isInRange(14));
   EXPECT_TRUE(range.isInRange(15));
 }
+
+TEST(Range_Tests, shouldNotCompress) {
+  // Given
+  Range rangeOne(1, 5);
+  Range rangeTwo(6, 10);
+  // When
+  rangeOne.compressUsingRange(rangeTwo);
+  // Then
+  EXPECT_EQ(rangeOne.getStartId(), 1);
+  EXPECT_EQ(rangeOne.getEndId(), 5);
+}
+
+TEST(Range_Tests, shouldCompressStartDate) {
+  // Given
+  Range rangeOne(3, 8);
+  Range rangeTwo(1, 4);
+  // When
+  rangeOne.compressUsingRange(rangeTwo);
+  // Then
+  EXPECT_EQ(rangeOne.getStartId(), 5);
+  EXPECT_EQ(rangeOne.getEndId(), 8);
+  EXPECT_FALSE(rangeOne.getInvalid());
+}
+
+TEST(Range_Tests, shouldCompressEndDate) {
+  // Given
+  Range rangeOne(1, 5);
+  Range rangeTwo(5, 10);
+  // When
+  rangeOne.compressUsingRange(rangeTwo);
+  // Then
+  EXPECT_EQ(rangeOne.getStartId(), 1);
+  EXPECT_EQ(rangeOne.getEndId(), 4);
+  EXPECT_FALSE(rangeOne.getInvalid());
+}
+
+TEST(Range_Tests, shouldMarkAsInvalid) {
+  // Given
+  Range rangeOne(3, 5);
+  Range rangeTwo(2, 10);
+  // When
+  rangeOne.compressUsingRange(rangeTwo);
+  // Then
+  EXPECT_EQ(rangeOne.getStartId(), 3);
+  EXPECT_EQ(rangeOne.getEndId(), 5);
+  EXPECT_TRUE(rangeOne.getInvalid());
+}

@@ -123,7 +123,7 @@ TEST_F(Example_Tests, Day5_Part1) {
   EXPECT_EQ(result, "3");
 }
 
-TEST_F(Example_Tests, Day5_Part2) {
+TEST_F(Example_Tests, Day5_Part2_check) {
   // Given
   const auto input = getTestInput("testData/day5.txt");
   Day05 day;
