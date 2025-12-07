@@ -49,6 +49,11 @@ add_executable(Google_Tests_run
         day4/PaperGridTest.cpp
         ../cpp/day5/Day05.cpp
         ../cpp/day5/Day05.h
+        ../cpp/day7/Beam.cpp
+        ../cpp/day7/Beam.h
+        day7/BeamTests.cpp
+        ../cpp/day7/Day07.cpp
+        ../cpp/day7/Day07.h
 )
 
 # Set optimization flags for Release configuration

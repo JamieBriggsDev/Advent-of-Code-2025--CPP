@@ -35,6 +35,10 @@ add_executable(aoc2025 main.cpp
         cpp/day4/PaperGrid.h
         cpp/day5/Day05.cpp
         cpp/day5/Day05.h
+        cpp/day7/Beam.cpp
+        cpp/day7/Beam.h
+        cpp/day7/Day07.cpp
+        cpp/day7/Day07.h
 )
 
 add_subdirectory(googletest)
