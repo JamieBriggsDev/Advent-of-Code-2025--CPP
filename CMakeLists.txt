@@ -39,6 +39,7 @@ add_executable(aoc2025 main.cpp
         cpp/day7/Beam.h
         cpp/day7/Day07.cpp
         cpp/day7/Day07.h
+        cpp/day7/BeamPath.h
 )
 
 add_subdirectory(googletest)

@@ -4,6 +4,8 @@
 
 #include "Day07.h"
 
+#include <iostream>
+
 #include "Beam.h"
 
 namespace solutions {
@@ -16,8 +18,8 @@ namespace solutions {
     for (int i = 1; i < rows.size(); i++) {
       beam.moveDownward(rows[i]);
     }
-
     return std::to_string(beam.getTotalSplits());
+
   }
 
   std::string Day07::solvePartTwo(const helper::SolutionInput *input) {

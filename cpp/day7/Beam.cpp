@@ -5,45 +5,86 @@
 #include "Beam.h"
 
 #include <algorithm>
+#include <iostream>
+#include <map>
 
 namespace D7 {
 
   Beam::Beam(std::string input) {
     int beamPosition = input.find('S');
-    this->beamPositions_.push_back(std::vector{beamPosition});
+    this->beamPaths_.emplace_back(beamPosition, 1);
   }
 
-  std::vector<int> Beam::getBeamPositions(const int position) const { return this->beamPositions_[position]; }
-
-  void Beam::moveDownward(std::string row) {
-    int latestRowIndex{static_cast<int>(this->beamPositions_.size() - 1)};
-    auto previousRow = this->beamPositions_[latestRowIndex];
-    std::vector<int> newRow;
-    for (int position: previousRow) {
-      if (row[position] == '^') {
-        this->totalSplits++;
-        int totalChanges = 0;
-        if (position > 0) {
-          totalChanges++;
-          newRow.push_back(position - 1);
-        }
-        if (position < row.length() - 1) {
-          totalChanges++;
-          newRow.push_back(position + 1);
-        }
-
-        if (totalChanges == 2) {
-          this->totalPaths += 1;
-        }
-      } else {
-        newRow.push_back(position);
+  std::vector<int> Beam::getCurrentBeamPositions() const {
+    std::vector<int> result;
+    for (const auto &beamPath: beamPaths_) {
+      if (!beamPath.hasOutOfBounds()) {
+        result.emplace_back(beamPath.getCurrentPosition());
       }
     }
 
-      // Remove duplicate numbers from newRow
-      std::sort(newRow.begin(), newRow.end());
-      newRow.erase(std::unique(newRow.begin(), newRow.end()), newRow.end());
+    std::sort(result.begin(), result.end());
+    result.erase(std::unique(result.begin(), result.end()), result.end());
 
-    beamPositions_.emplace_back(newRow);
+    return result;
+  }
+
+  void Beam::moveDownward(const std::string &row) {
+
+    std::map<int, int> beamPathsToAdd_;
+
+    std::string rowBeingMade = row;
+
+    for (auto &beamPath: beamPaths_) {
+      if (beamPath.hasOutOfBounds()) {
+        continue;
+      }
+
+
+      if (int currentPosition = beamPath.getCurrentPosition(); row[currentPosition] == '^') {
+        // This is used to find the answer to part 1
+        this->totalSplits++;
+
+
+        // Make current route keep left, and make new route via right direction
+        if (currentPosition > 0) {
+          rowBeingMade[currentPosition - 1] = '|';
+          beamPath.setCurrentStep(currentPosition - 1);
+        } else if (currentPosition == 0) {
+          beamPath.setOutOfBounds(true);
+        }
+
+        // Go right
+        if (currentPosition < row.length() - 1) {
+          rowBeingMade[currentPosition + 1] = '|';
+          beamPathsToAdd_.emplace(currentPosition + 1, beamPath.getTotalRoutesToCurrentStep());
+        } else if (currentPosition == row.length()) {
+          beamPath.setOutOfBounds(true);
+        }
+
+      } else {
+        rowBeingMade[currentPosition] = '|';
+        beamPath.setCurrentStep(currentPosition);
+      }
+    }
+
+
+    // Add any new paths which were found, whilst merging duplicate current steps
+    for (const auto &newPath: beamPathsToAdd_) {
+      bool foundDuplicate = false;
+      for (auto &existingPath: beamPaths_) {
+        if (newPath.first == existingPath.getCurrentPosition()) {
+          existingPath.addToTotalRoutesToCurrentStep(newPath.second);
+          foundDuplicate = true;
+        }
+      }
+      if (!foundDuplicate) {
+        BeamPath newPathToAdd(newPath.first, newPath.second);
+        beamPaths_.emplace_back(newPathToAdd);
+      }
+    }
+
+    long total_paths = this->getTotalPaths();
+    std::cout << rowBeingMade << " " << total_paths << std::endl;
   }
 } // namespace D7

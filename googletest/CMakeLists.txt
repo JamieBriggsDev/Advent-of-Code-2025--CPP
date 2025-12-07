@@ -54,6 +54,7 @@ add_executable(Google_Tests_run
         day7/BeamTests.cpp
         ../cpp/day7/Day07.cpp
         ../cpp/day7/Day07.h
+        ../cpp/day7/BeamPath.h
 )
 
 # Set optimization flags for Release configuration

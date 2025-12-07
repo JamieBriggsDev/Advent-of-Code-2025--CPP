@@ -14,7 +14,7 @@ TEST(Beam_Tests, ShouldInitialize) {
   // When
   Beam beam(row);
   // Then
-  auto result = beam.getBeamPositions(0);
+  auto result = beam.getCurrentBeamPositions();
   EXPECT_EQ(result.size(), 1);
   EXPECT_EQ(result[0], 3);
   EXPECT_EQ(beam.getTotalSplits(), 0);
@@ -27,7 +27,7 @@ TEST(Beam_Tests, ShouldNotSplitAndAddRow) {
   // When
   beam.moveDownward(".......");
   // Then
-  auto result = beam.getBeamPositions(1);
+  auto result = beam.getCurrentBeamPositions();
   EXPECT_EQ(result.size(), 1);
   EXPECT_EQ(result[0], 3);
   EXPECT_EQ(beam.getTotalSplits(), 0);
@@ -41,7 +41,7 @@ TEST(Beam_Tests, ShouldNotSplitAndAddTwoRows) {
   beam.moveDownward(".......");
   beam.moveDownward(".......");
   // Then
-  auto result = beam.getBeamPositions(2);
+  auto result = beam.getCurrentBeamPositions();
   EXPECT_EQ(result.size(), 1);
   EXPECT_EQ(result[0], 3);
   EXPECT_EQ(beam.getTotalSplits(), 0);
@@ -54,7 +54,7 @@ TEST(Beam_Tests, ShouldSplitBeam) {
   // When
   beam.moveDownward("...^...");
   // Then
-  auto result = beam.getBeamPositions(1);
+  auto result = beam.getCurrentBeamPositions();
   EXPECT_EQ(result.size(), 2);
   EXPECT_EQ(result[0], 2);
   EXPECT_EQ(result[1], 4);
@@ -68,7 +68,7 @@ TEST(Beam_Tests, ShouldHandleSplitGoingOutOfBoundsLeft) {
   // When
   beam.moveDownward("^......");
   // Then
-  auto result = beam.getBeamPositions(1);
+  auto result = beam.getCurrentBeamPositions();
   EXPECT_EQ(result.size(), 1);
   EXPECT_EQ(result[0], 1);
   EXPECT_EQ(beam.getTotalSplits(), 1);
@@ -81,7 +81,7 @@ TEST(Beam_Tests, ShouldHandleSplitGoingOutOfBoundsRight) {
   // When
   beam.moveDownward("......^");
   // Then
-  auto result = beam.getBeamPositions(1);
+  auto result = beam.getCurrentBeamPositions();
   EXPECT_EQ(result.size(), 1);
   EXPECT_EQ(result[0], 5);
   EXPECT_EQ(beam.getTotalSplits(), 1);
@@ -95,7 +95,7 @@ TEST(Beam_Tests, ShouldMergeBeams) {
   beam.moveDownward("...^...");
   beam.moveDownward("..^.^..");
   // Then
-  auto result = beam.getBeamPositions(2);
+  auto result = beam.getCurrentBeamPositions();
   EXPECT_EQ(result.size(), 3);
   EXPECT_EQ(result[0], 1);
   EXPECT_EQ(result[1], 3);
@@ -126,7 +126,7 @@ TEST(Beam_Tests, ShouldFindTotalPaths3) {
   EXPECT_EQ(beam.getTotalPaths(), 4);
 }
 
-TEST(Beam_Tests, ShouldFindTotalPathsIgnoreOutofBounds) {
+TEST(Beam_Tests, ShouldFindTotalPathsWhenGoingOutOfBounds) {
   // Given
   std::string row = ".S......";
   Beam beam(row);
@@ -135,6 +135,30 @@ TEST(Beam_Tests, ShouldFindTotalPathsIgnoreOutofBounds) {
   beam.moveDownward(".^...");
   beam.moveDownward("^....");
   beam.moveDownward(".....");
+  // Then
+  EXPECT_EQ(beam.getTotalPaths(), 3);
+}
+
+
+TEST(Beam_Tests, ShouldRememberAllPaths_NoSplit) {
+  // Given
+  std::string row = "...S...";
+  Beam beam(row);
+  // When
+  beam.moveDownward(".......");
+  //beam.moveDownward("...^...");
+  // Then
+  EXPECT_EQ(beam.getTotalPaths(), 1);
+}
+
+
+TEST(Beam_Tests, ShouldRememberAllPaths_Split) {
+  // Given
+  std::string row = "...S...";
+  Beam beam(row);
+  // When
+  beam.moveDownward(".......");
+  beam.moveDownward("...^...");
   // Then
   EXPECT_EQ(beam.getTotalPaths(), 2);
 }
