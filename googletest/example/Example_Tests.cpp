@@ -159,9 +159,20 @@ TEST_F(Example_Tests, Day7_Part1) {
 TEST_F(Example_Tests, Day8_Part1) {
   // Given
   const auto input = getTestInput("testData/day8.txt");
-  Day08 day;
+  Day08 day(10);
   // When
   const auto result = day.solvePartOne(input);
   // Then
   EXPECT_EQ(result, "40");
+}
+
+TEST_F(Example_Tests, Day8_Part2) {
+  // Given
+  const auto input = getTestInput("testData/day8.txt");
+  Day08 day(10);
+  // When
+  const auto resultOne = day.solvePartOne(input);
+  const auto result = day.solvePartTwo(input);
+  // Then
+  EXPECT_EQ(result, "25272");
 }
