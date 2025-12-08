@@ -49,8 +49,21 @@ add_executable(Google_Tests_run
         day4/PaperGridTest.cpp
         ../cpp/day5/Day05.cpp
         ../cpp/day5/Day05.h
+        ../cpp/day7/Beam.cpp
+        ../cpp/day7/Beam.h
+        day7/BeamTests.cpp
+        ../cpp/day7/Day07.cpp
+        ../cpp/day7/Day07.h
+        ../cpp/day7/BeamPath.h
+        ../cpp/day8/Day08.h
+        ../cpp/day8/Day08.cpp
+        ../cpp/day8/JunctionBox.h
+        ../cpp/day8/JunctionBox.cpp
+        day8/JunctionBoxTests.cpp
+        ../cpp/day8/Circuits.cpp
+        ../cpp/day8/Circuits.h
+        day8/CircuitsTests.cpp
 )
 
 # Set optimization flags for Release configuration
-
 target_link_libraries(Google_Tests_run gtest gtest_main)

@@ -32,20 +32,11 @@ namespace core {
 
     bool setContainsPair(std::set<Pair> pairs) {
       return pairs.contains(core::Pair(x, y));
-      /*for (auto pair: pairs) {
-        if (pair.x == x && pair.y == y) {
-          return true;
-        }
-      }
-      return false;*/
     }
 
     std::string toString() const {
       return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";
     }
-
-
-
 
     bool operator==(const Pair &other) const { return (x == other.x) && (y == other.y); }
     Pair operator+(const Pair &other) const { return Pair(x + other.x, y + other.y); }
