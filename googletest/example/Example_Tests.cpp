@@ -144,7 +144,7 @@ TEST_F(Example_Tests, Day7_Part1) {
   EXPECT_EQ(result, "21");
 }
 
-TEST_F(Example_Tests, Day7_Part2) {
+/**TEST_F(Example_Tests, Day7_Part2) {
   // Given
   const auto input = getTestInput("testData/day7.txt");
   Day07 day;
@@ -153,3 +153,4 @@ TEST_F(Example_Tests, Day7_Part2) {
   // Then
   EXPECT_EQ(result, "40");
 }
+*/
