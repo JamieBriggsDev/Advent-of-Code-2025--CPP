@@ -63,6 +63,8 @@ add_executable(Google_Tests_run
         ../cpp/day8/Circuits.cpp
         ../cpp/day8/Circuits.h
         day8/CircuitsTests.cpp
+        ../cpp/day9/Day09.cpp
+        ../cpp/day9/Day09.h
 )
 
 # Set optimization flags for Release configuration

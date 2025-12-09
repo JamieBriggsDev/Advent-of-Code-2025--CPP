@@ -34,6 +34,11 @@ namespace core {
       return pairs.contains(core::Pair(x, y));
     }
 
+    long long areaBetween(const Pair &pair) {
+      long long xResult = std::abs(x - pair.x) + 1;
+      long long yResult = std::abs(y - pair.y) + 1;
+      return xResult * yResult;
+    }
     std::string toString() const {
       return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";
     }
