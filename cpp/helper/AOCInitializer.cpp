@@ -14,6 +14,7 @@
 #include "../day5/Day05.h"
 #include "../day7/Day07.h"
 #include "../day8/Day08.h"
+#include "../day9/Day09.h"
 #include "FileReader.h"
 
 namespace helper {
@@ -40,6 +41,9 @@ namespace helper {
         break;
       case 8:
         day = new solutions::Day08(1000);
+        break;
+      case 9:
+        day = new solutions::Day09();
         break;
       default:
         printf("Unknown day passed %d", dayNumber);

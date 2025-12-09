@@ -18,29 +18,29 @@ int main(int argc, char* argv[]) {
   // List time elapsed to load data
   const auto inputDuration =
       std::chrono::duration_cast<std::chrono::milliseconds>(endInput - startInput);
-  std::cout << "\nTook " << inputDuration.count() << "ms to load data\n\n";
+  std::cout << "\nTook " << inputDuration.count() << "ms to load data\n";
 
   // Solve part one of solution
-  std::cout << "Solving Part 1 of solution...";
+  std::cout << "\n\t### Solving Part 1 of solution...\n\n";
   const auto startPartOne = std::chrono::high_resolution_clock::now();
   const auto solve_part_one = day->solvePartOne(input);
   const auto endPartOne = std::chrono::high_resolution_clock::now();
   const auto partOneDuration =
       std::chrono::duration_cast<std::chrono::milliseconds>(endPartOne - startPartOne);
-  std::cout << "\nPart 1 solution: " << solve_part_one;
-  std::cout << "\nPart 1 took " << partOneDuration.count() << "ms to solve";
+  std::cout << "\n\tPart 1 solution: " << solve_part_one;
+  std::cout << "\n\tPart 1 took " << partOneDuration.count() << "ms to solve";
 
   std::cout << std::endl;
 
   // Solve part two of solution
-  std::cout << "\nSolving Part 2 of solution...";
+  std::cout << "\n\t### Solving Part 2 of solution...\n";
   const auto startPartTwo = std::chrono::high_resolution_clock::now();
   const auto solve_part_two = day->solvePartTwo(input);
   const auto endPartTwo = std::chrono::high_resolution_clock::now();
   const auto partTwoDuration =
       std::chrono::duration_cast<std::chrono::milliseconds>(endPartTwo - startPartTwo);
-  std::cout << "\nPart 2 solution: " << solve_part_two;
-  std::cout << "\nPart 2 took " << partTwoDuration.count() << "ms to solve\n";
+  std::cout << "\n\tPart 2 solution: " << solve_part_two;
+  std::cout << "\n\tPart 2 took " << partTwoDuration.count() << "ms to solve\n";
 
   return 0;
 }
