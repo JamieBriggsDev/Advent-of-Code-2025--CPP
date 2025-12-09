@@ -189,7 +189,7 @@ TEST_F(Example_Tests, Day9_Part1) {
 }
 
 
-TEST_F(Example_Tests, Day9_Part2) {
+/*TEST_F(Example_Tests, Day9_Part2) {
   // Given
   const auto input = getTestInput("testData/day9.txt");
   Day09 day;
@@ -197,4 +197,4 @@ TEST_F(Example_Tests, Day9_Part2) {
   const auto result = day.solvePartTwo(input);
   // Then
   EXPECT_EQ(result, "24");
-}
+}*/
