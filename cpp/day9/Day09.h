@@ -5,6 +5,7 @@
 #ifndef AOC2025_DAY09_H
 #define AOC2025_DAY09_H
 #include "../Day.h"
+#include "../core/Pair.h"
 
 namespace solutions {
 
@@ -12,6 +13,7 @@ namespace solutions {
   public:
     std::string solvePartOne(const helper::SolutionInput *input) override;
     std::string solvePartTwo(const helper::SolutionInput *input) override;
+    static std::vector<core::Pair> createRedTiles(const std::vector<std::string> &input);
   };
 
 } // namespace solutions

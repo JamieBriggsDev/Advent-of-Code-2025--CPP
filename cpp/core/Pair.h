@@ -30,17 +30,46 @@ namespace core {
       return sqrt(pow(x - other.x, 2) + pow(y - other.y, 2));
     }
 
-    bool setContainsPair(std::set<Pair> pairs) {
-      return pairs.contains(core::Pair(x, y));
-    }
+    bool setContainsPair(std::set<Pair> pairs) { return pairs.contains(core::Pair(x, y)); }
 
     long long areaBetween(const Pair &pair) {
       long long xResult = std::abs(x - pair.x) + 1;
       long long yResult = std::abs(y - pair.y) + 1;
       return xResult * yResult;
     }
-    std::string toString() const {
-      return "(" + std::to_string(x) + ", " + std::to_string(y) + ")";
+    std::string toString() const { return "(" + std::to_string(x) + ", " + std::to_string(y) + ")"; }
+
+    bool sitsInbetween(Pair second, Pair value) {
+      // Check if sits inbetween the x axis
+      if (this->x == second.x && this->x == value.x) {
+        long long minY = std::min(this->y, second.y);
+        long long maxY = std::max(this->y, second.y);
+        return value.y >= minY && value.y <= maxY;
+      }
+      if (this->y == second.y && this->y == value.y) {
+        long long minX = std::min(this->x, second.x);
+        long long maxX = std::max(this->x, second.x);
+        return value.x >= minX && value.x <= maxX;
+      }
+      return false;
+    }
+
+    std::vector<Pair> getAllPairsAcrossRange(Pair other) {
+      std::vector<Pair> result;
+      if (this->x == other.x) {
+        long long minY = std::min(this->y, other.y);
+        long long maxY = std::max(this->y, other.y);
+        for (long long idxY = minY; idxY <= maxY; idxY++) {
+          result.emplace_back(this->x, idxY);
+        }
+      } else if (this->y == other.y) {
+        long long minX = std::min(this->x, other.x);
+        long long maxX = std::max(this->x, other.x);
+        for (long long idxX = minX; idxX <= maxX; idxX++) {
+          result.emplace_back(idxX, this->y);
+        }
+      }
+      return result;
     }
 
     bool operator==(const Pair &other) const { return (x == other.x) && (y == other.y); }
@@ -50,13 +79,8 @@ namespace core {
       y += other.y;
     }
     Pair operator-(const Pair &other) const { return Pair(x - other.x, y - other.y); }
-    bool operator<(const Pair &other) const {
-      return (x < other.x) || (x == other.x && y < other.y);
-    }
-    bool operator>(const Pair &other) const {
-      return (x > other.x) || (x == other.x && y > other.y);
-    }
-
+    bool operator<(const Pair &other) const { return (x < other.x) || (x == other.x && y < other.y); }
+    bool operator>(const Pair &other) const { return (x > other.x) || (x == other.x && y > other.y); }
   };
 
 } // namespace core
