@@ -22,6 +22,7 @@ namespace D10 {
     std::vector<bool> getGoal() const {
       return goal;
     }
+    void reset();
     bool isValid();
   };
 

@@ -8,6 +8,8 @@
 #include <ranges>
 #include <regex>
 
+#include "../core/AocException.h"
+
 namespace D10 {
 
 
@@ -42,5 +44,53 @@ namespace D10 {
     });
 
     // TODO: Joltages
+  }
+  std::vector<uint8_t> LightMachine::findFewestPresses() const {
+    std::vector<uint8_t> buttonsPressed;
+    this->diagram->reset();
+    int levelsDeep = 0;
+    while (levelsDeep < 5) {
+      this->diagram->reset();
+      levelsDeep++;
+      if (recursiveFindFewestPresses(buttonsPressed, 0, levelsDeep)) {
+        return buttonsPressed;
+      }
+    }
+
+    return buttonsPressed;
+  }
+  bool LightMachine::recursiveFindFewestPresses(std::vector<uint8_t> &buttonsPressed, uint8_t currentLevel,
+                                                uint8_t maximumLevel) const {
+    if (currentLevel >= maximumLevel) {
+      return false;
+    }
+    for (int i = 0; i < this->buttonSchematics_.size(); i++) {
+      std::vector<bool> stateMatchOne = this->diagram->getState();
+
+      auto buttonToPressThisIteration = this->buttonSchematics_[i];
+      // Press button
+      // Add button reference to buttons pressed
+      this->diagram->pressButtons(buttonToPressThisIteration);
+      buttonsPressed.push_back(i);
+
+      if (this->diagram->isValid()) {
+        return true;
+      }
+      recursiveFindFewestPresses(buttonsPressed, currentLevel + 1, maximumLevel);
+
+      // Check after recursion
+      if (this->diagram->isValid()) {
+        return true;
+      }
+
+      // Press same buttons again to "undo"
+      // Remove last button pressed
+      this->diagram->pressButtons(buttonToPressThisIteration);
+      buttonsPressed.pop_back();
+
+      std::vector<bool> stateMatchTwo = this->diagram->getState();
+    }
+
+    return false;
   }
 } // namespace D10

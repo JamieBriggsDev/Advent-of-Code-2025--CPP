@@ -19,6 +19,11 @@ namespace D10 {
       state[button] = !state[button];
     }
   }
+  void LightDiagram::reset() {
+    for (int i = 0; i < state.size(); i++) {
+      state[i] = false;
+    }
+  }
   bool LightDiagram::isValid() {
     bool valid = true;
     for (int i = 0; i < state.size(); i++) {

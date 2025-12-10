@@ -25,3 +25,77 @@ TEST(LightMachine_Tests, ShouldInitializeWithoutJoltage) {
 }
 
 // TODO Test initialize with joltage for part 2
+
+
+TEST(LightMachine_Tests, ShouldFindFewestTotalPressesWithOneNumber) {
+  // Given
+  std::string input = "[#] (0)";
+  const D10::LightMachine lightMachine(input);
+  // When
+  auto result = lightMachine.findFewestPresses();
+  // Then
+  ASSERT_EQ(result.size(), 1);
+  ASSERT_EQ(result[0], 0);
+}
+
+TEST(LightMachine_Tests, ShouldFindFewestTotalPressesWithOneNumberMoreInput) {
+  // Given
+  std::string input = "[.#.] (0) (1) (0)";
+  const D10::LightMachine lightMachine(input);
+  // When
+  auto result = lightMachine.findFewestPresses();
+  // Then
+  ASSERT_EQ(result.size(), 1);
+  ASSERT_EQ(result[0], 1);
+}
+
+TEST(LightMachine_Tests, ShouldFindFewestTotalPressesWithOneNumberLongerNumbers) {
+  // Given
+  std::string input = "[.#.#] (0) (1,2) (0) (1,3)";
+  const D10::LightMachine lightMachine(input);
+  // When
+  auto result = lightMachine.findFewestPresses();
+  // Then
+  ASSERT_EQ(result.size(), 1);
+  ASSERT_EQ(result[0], 3);
+}
+
+TEST(LightMachine_Tests, ShouldFindFewestTotalPressesWithTwoNumbers) {
+  // Given
+  std::string input = "[##] (0) (1)";
+  const D10::LightMachine lightMachine(input);
+  // When
+  auto result = lightMachine.findFewestPresses();
+  // Then
+  ASSERT_EQ(result.size(), 2);
+  ASSERT_EQ(result[0], 0);
+  ASSERT_EQ(result[1], 1);
+}
+
+TEST(LightMachine_Tests, ShouldFindFewestExampleOne) {
+  // Given
+  std::string input = "[.##.] (3) (1,3) (2) (2,3) (0,2) (0,1)";
+  const D10::LightMachine lightMachine(input);
+  // When
+  auto result = lightMachine.findFewestPresses();
+  // Then
+  ASSERT_EQ(result.size(), 2);
+  ASSERT_EQ(result[0], 2);
+  ASSERT_EQ(result[1], 3);
+}
+
+TEST(LightMachine_Tests, ShouldFindFewestExampleTwo) {
+  // Given
+  std::string input = "[...#.] (0,2,3,4) (2,3) (0,4) (0,1,2) (1,2,3,4) {7,5,12,7,2}";
+  const D10::LightMachine lightMachine(input);
+  // When
+  auto result = lightMachine.findFewestPresses();
+  // Then
+  ASSERT_EQ(result.size(), 3);
+  auto one = lightMachine.getButtonSchematics()[result[0]];
+  auto two = lightMachine.getButtonSchematics()[result[1]];
+  auto three = lightMachine.getButtonSchematics()[result[2]];
+  ASSERT_EQ(result[0], 1);
+  ASSERT_EQ(result[1], 2);
+  ASSERT_EQ(result[2], 4);
+}
