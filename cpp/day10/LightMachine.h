@@ -9,18 +9,19 @@
 namespace D10 {
 
   class LightMachine {
-    LightDiagram* diagram;
+    LightDiagram *diagram;
     std::vector<ButtonSchematic> buttonSchematics_;
-    public:
-    bool recursiveFindFewestPresses(std::vector<uint16_t>& buttonsPressed, uint16_t currentLevel, uint16_t maximumLevel) const;
+
+    bool recursiveFindFewestPresses(std::vector<uint16_t> &buttonsPressed, uint16_t currentLevel,
+                                    uint16_t maximumLevel) const;
+    bool recursiveFindFewestJoltagePresses(std::vector<uint16_t> &buttonsPressed, uint16_t currentLevel,
+                                    uint16_t maximumLevel) const;
+  public:
     LightMachine(const std::string &input);
-    LightDiagram getDiagram() const {
-      return *diagram;
-    }
-    std::vector<ButtonSchematic> getButtonSchematics() const {
-      return buttonSchematics_;
-    }
+    LightDiagram getDiagram() const { return *diagram; }
+    std::vector<ButtonSchematic> getButtonSchematics() const { return buttonSchematics_; }
     std::vector<uint16_t> findFewestPresses() const;
+    std::vector<uint16_t> findFewestJoltagePresses() const;
   };
 
 } // namespace D10

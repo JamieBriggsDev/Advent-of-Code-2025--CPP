@@ -16,6 +16,10 @@ TEST(LightMachine_Tests, ShouldInitializeWithoutJoltage) {
   ASSERT_TRUE(lightMachine.getDiagram().getGoal()[1]);
   ASSERT_TRUE(lightMachine.getDiagram().getGoal()[2]);
   ASSERT_FALSE(lightMachine.getDiagram().getGoal()[3]);
+  ASSERT_EQ(lightMachine.getDiagram().getJoltageGoal()[0], 3);
+  ASSERT_EQ(lightMachine.getDiagram().getJoltageGoal()[1], 5);
+  ASSERT_EQ(lightMachine.getDiagram().getJoltageGoal()[2], 4);
+  ASSERT_EQ(lightMachine.getDiagram().getJoltageGoal()[3], 7);
   ASSERT_EQ(6, lightMachine.getButtonSchematics().size());
   // Just check first button, tests exist for button initialization
   ASSERT_EQ(1, lightMachine.getButtonSchematics()[0].getButtons().size());
@@ -24,12 +28,10 @@ TEST(LightMachine_Tests, ShouldInitializeWithoutJoltage) {
   ASSERT_EQ(3, lightMachine.getButtonSchematics()[5].getButtons().size());
 }
 
-// TODO Test initialize with joltage for part 2
-
 
 TEST(LightMachine_Tests, ShouldFindFewestTotalPressesWithOneNumber) {
   // Given
-  std::string input = "[#] (0)";
+  std::string input = "[#] (0) {0}";
   const D10::LightMachine lightMachine(input);
   // When
   auto result = lightMachine.findFewestPresses();
@@ -40,7 +42,7 @@ TEST(LightMachine_Tests, ShouldFindFewestTotalPressesWithOneNumber) {
 
 TEST(LightMachine_Tests, ShouldFindFewestTotalPressesWithOneNumberMoreInput) {
   // Given
-  std::string input = "[.#.] (0) (1) (0)";
+  std::string input = "[.#.] (0) (1) (0) {0,1,2}";
   const D10::LightMachine lightMachine(input);
   // When
   auto result = lightMachine.findFewestPresses();
@@ -51,7 +53,7 @@ TEST(LightMachine_Tests, ShouldFindFewestTotalPressesWithOneNumberMoreInput) {
 
 TEST(LightMachine_Tests, ShouldFindFewestTotalPressesWithOneNumberLongerNumbers) {
   // Given
-  std::string input = "[.#.#] (0) (1,2) (0) (1,3)";
+  std::string input = "[.#.#] (0) (1,2) (0) (1,3) {1,2,3,4}";
   const D10::LightMachine lightMachine(input);
   // When
   auto result = lightMachine.findFewestPresses();
@@ -62,7 +64,7 @@ TEST(LightMachine_Tests, ShouldFindFewestTotalPressesWithOneNumberLongerNumbers)
 
 TEST(LightMachine_Tests, ShouldFindFewestTotalPressesWithTwoNumbers) {
   // Given
-  std::string input = "[##] (0) (1)";
+  std::string input = "[##] (0) (1) {1,2}";
   const D10::LightMachine lightMachine(input);
   // When
   auto result = lightMachine.findFewestPresses();
@@ -74,7 +76,7 @@ TEST(LightMachine_Tests, ShouldFindFewestTotalPressesWithTwoNumbers) {
 
 TEST(LightMachine_Tests, ShouldFindFewestExampleOne) {
   // Given
-  std::string input = "[.##.] (3) (1,3) (2) (2,3) (0,2) (0,1)";
+  std::string input = "[.##.] (3) (1,3) (2) (2,3) (0,2) (0,1) {1,2,3,4}";
   const D10::LightMachine lightMachine(input);
   // When
   auto result = lightMachine.findFewestPresses();
@@ -98,4 +100,16 @@ TEST(LightMachine_Tests, ShouldFindFewestExampleTwo) {
   ASSERT_EQ(result[0], 1);
   ASSERT_EQ(result[1], 2);
   ASSERT_EQ(result[2], 4);
+}
+
+TEST(LightMachine_Tests, ShouldFindFewestJoltageExampleOne) {
+  // Given
+  std::string input = "[.##.] (3) (1,3) (2) (2,3) (0,2) (0,1) {3,5,4,7}";
+  const D10::LightMachine lightMachine(input);
+  // When
+  auto result = lightMachine.findFewestJoltagePresses();
+  // Then
+  ASSERT_EQ(result.size(), 10);
+  ASSERT_EQ(result[0], 2);
+  ASSERT_EQ(result[1], 3);
 }

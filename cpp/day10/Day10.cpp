@@ -22,7 +22,7 @@ namespace solutions {
     std::cout << "Total machines: " << lightMachines.size() << std::endl;
     int idx = 0;
     for (const auto &machine: lightMachines) {
-      std::cout << "Machine: " << idx << std::endl;
+      std::cout << "Machine: " << idx++ << std::endl;
       auto fewestPresses = machine.findFewestPresses();
       finalTotal += fewestPresses.size();
     }
