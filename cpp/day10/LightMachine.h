@@ -12,15 +12,15 @@ namespace D10 {
     LightDiagram* diagram;
     std::vector<ButtonSchematic> buttonSchematics_;
     public:
-    bool recursiveFindFewestPresses(std::vector<uint8_t>& buttonsPressed, uint8_t currentLevel, uint8_t maximumLevel) const;
-    LightMachine(std::string &input);
+    bool recursiveFindFewestPresses(std::vector<uint16_t>& buttonsPressed, uint16_t currentLevel, uint16_t maximumLevel) const;
+    LightMachine(const std::string &input);
     LightDiagram getDiagram() const {
       return *diagram;
     }
     std::vector<ButtonSchematic> getButtonSchematics() const {
       return buttonSchematics_;
     }
-    std::vector<uint8_t> findFewestPresses() const;
+    std::vector<uint16_t> findFewestPresses() const;
   };
 
 } // namespace D10

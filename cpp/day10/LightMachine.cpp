@@ -13,7 +13,7 @@
 namespace D10 {
 
 
-  LightMachine::LightMachine(std::string &input) {
+  LightMachine::LightMachine(const std::string &input) {
     // Three capture groups
     // [   ]   |   ( ) ( ) ( )   |   {  }
     const std::regex machineRegex(R"(\[(.*?)\]|\((\d+(?:,\d+)*)\)|\{(\d+(?:,\d+)*)\})");
@@ -45,22 +45,34 @@ namespace D10 {
 
     // TODO: Joltages
   }
-  std::vector<uint8_t> LightMachine::findFewestPresses() const {
-    std::vector<uint8_t> buttonsPressed;
+  std::vector<uint16_t> LightMachine::findFewestPresses() const {
+    std::vector<uint16_t> buttonsPressed;
     this->diagram->reset();
     int levelsDeep = 0;
-    while (levelsDeep < 5) {
+    bool found = false;
+    while (!found ) {
       this->diagram->reset();
       levelsDeep++;
       if (recursiveFindFewestPresses(buttonsPressed, 0, levelsDeep)) {
-        return buttonsPressed;
+        found = true;
+      }
+    }
+
+    // Sanity check here
+    for (const auto &buttonIndex: buttonsPressed) {
+      ButtonSchematic schematic = this->buttonSchematics_[buttonIndex];
+      this->diagram->pressButtons(schematic);
+    }
+    for (const auto state: this->diagram->getState()) {
+      if (state) {
+        throw core::AocException("Machine is not reset");
       }
     }
 
     return buttonsPressed;
   }
-  bool LightMachine::recursiveFindFewestPresses(std::vector<uint8_t> &buttonsPressed, uint8_t currentLevel,
-                                                uint8_t maximumLevel) const {
+  bool LightMachine::recursiveFindFewestPresses(std::vector<uint16_t> &buttonsPressed, uint16_t currentLevel,
+                                                uint16_t maximumLevel) const {
     if (currentLevel >= maximumLevel) {
       return false;
     }

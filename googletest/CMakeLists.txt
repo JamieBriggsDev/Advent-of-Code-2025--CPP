@@ -77,6 +77,8 @@ add_executable(Google_Tests_run
         ../cpp/day10/LightMachine.cpp
         ../cpp/day10/LightMachine.h
         day10/LightMachine_Tests.cpp
+        ../cpp/day10/Day10.cpp
+        ../cpp/day10/Day10.h
 )
 
 # Set optimization flags for Release configuration

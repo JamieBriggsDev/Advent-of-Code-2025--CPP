@@ -8,6 +8,7 @@
 #include <stdexcept>
 
 #include "../day1/Day01.h"
+#include "../day10/Day10.h"
 #include "../day2/Day02.h"
 #include "../day3/Day03.h"
 #include "../day4/Day04.h"
@@ -44,6 +45,9 @@ namespace helper {
         break;
       case 9:
         day = new solutions::Day09();
+        break;
+      case 10:
+        day = new solutions::Day10();
         break;
       default:
         printf("Unknown day passed %d", dayNumber);
