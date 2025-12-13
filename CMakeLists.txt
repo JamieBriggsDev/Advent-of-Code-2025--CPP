@@ -8,6 +8,7 @@ file(GLOB_RECURSE SOURCE_FILES
         "cpp/*.h"
 )
 
-add_executable(aoc2025 main.cpp ${SOURCE_FILES})
+add_executable(aoc2025 main.cpp ${SOURCE_FILES}
+        cpp/core/MemoryHelper.h)
 
 add_subdirectory(googletest)

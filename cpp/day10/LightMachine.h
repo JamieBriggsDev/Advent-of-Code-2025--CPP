@@ -22,19 +22,17 @@ namespace D10 {
   };
 
   class LightMachine {
-    std::unique_ptr<LightDiagram> diagram;
+    std::unique_ptr<LightDiagram> lightDiagram_;
     std::vector<ButtonSchematic> buttonSchematics_;
 
     bool recursiveFindFewestPresses(std::vector<uint16_t> &buttonsPressed, uint16_t currentLevel,
                                     uint16_t maximumLevel) const;
     std::vector<uint16_t> findFewestJoltagePressesThroughAllVariations(
-        const std::vector<std::vector<uint16_t>> &buttonPressesToTry,
-        const std::unordered_map<std::vector<uint16_t>, std::vector<uint32_t>, VecU16Hash> &previousPatterns,
-        std::unordered_map<std::vector<uint16_t>, std::vector<uint32_t>, VecU16Hash> &newPatterns) const;
+        const std::vector<std::vector<uint16_t>> &buttonPressesToTry) const;
 
   public:
     LightMachine(const std::string &input);
-    LightDiagram getDiagram() const { return *diagram; }
+    LightDiagram getDiagram() const { return *lightDiagram_; }
     std::vector<ButtonSchematic> getButtonSchematics() const { return buttonSchematics_; }
     std::vector<uint16_t> findFewestPresses() const;
     std::vector<uint16_t> findFewestJoltagePresses() const;

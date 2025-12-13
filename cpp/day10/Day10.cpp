@@ -8,6 +8,7 @@
 #include <ostream>
 #include <sys/resource.h>
 
+#include "../core/MemoryHelper.h"
 #include "LightMachine.h"
 
 namespace solutions {
@@ -24,25 +25,20 @@ namespace solutions {
     return std::to_string(finalTotal);
   }
   std::string Day10::solvePartTwo(const helper::SolutionInput *input) {
-    std::vector<D10::LightMachine> lightMachines;
-    for (const auto &row: input->getTestInput()) {
-      D10::LightMachine machine(row);
-      lightMachines.emplace_back(row);
-    }
-
     long finalTotal = 0;
-    std::cout << "Total machines: " << lightMachines.size() << std::endl;
-    int idx = 0;
-    for (const auto &machine: lightMachines) {
-      struct rusage usage{};
-      getrusage(RUSAGE_SELF, &usage);
-      std::cout << "Memory used: " << usage.ru_maxrss / 1024.0 << " MB" << std::endl;
 
+    const auto &rows = input->getTestInput();
+    std::cout << "Total machines to test: " << rows.size() << std::endl;
+
+    int idx = 0;
+    for (const auto &row: rows) {
+      core::MemoryHelper::print("Total used so far");
 
       std::cout << "Machine: " << idx++ << std::endl;
+
+      D10::LightMachine machine(row);
       auto fewestPresses = machine.findFewestJoltagePresses();
       finalTotal += fewestPresses.size();
-
     }
 
     return std::to_string(finalTotal);

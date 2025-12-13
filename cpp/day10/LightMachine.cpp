@@ -12,6 +12,7 @@
 #include <unordered_map>
 
 #include "../core/AocException.h"
+#include "../core/MemoryHelper.h"
 
 namespace D10 {
 
@@ -26,6 +27,66 @@ namespace D10 {
       current.push_back(b);
       genVariationsNonDecreasing(numButtons, presses, b, current, out); // b again allowed
       current.pop_back();
+    }
+  }
+
+  // Backtracking search that enumerates the same non-decreasing variations,
+  // but avoids building/storing them and avoids resetting/replaying each one.
+  static bool tryJoltageAtDepthNonDecreasing(
+      LightDiagram &diagram,
+      const std::vector<ButtonSchematic> &buttons,
+      int remainingPresses,
+      uint16_t minButtonIndex,
+      std::vector<uint16_t> &current) {
+
+    if (remainingPresses == 0) {
+      return diagram.isValidJoltage();
+    }
+
+    for (uint16_t b = minButtonIndex; b < buttons.size(); ++b) {
+      diagram.pressButtons(buttons[b]);
+      current.push_back(b);
+
+      if (tryJoltageAtDepthNonDecreasing(diagram, buttons, remainingPresses - 1, b, current)) {
+        return true;
+      }
+
+      diagram.unpressButtons(buttons[b]); // undo this branch
+      current.pop_back();
+    }
+
+    return false;
+  }
+
+  std::vector<uint16_t> LightMachine::findFewestJoltagePresses() const {
+    this->lightDiagram_->reset();
+
+    int levelsDeep = 1;
+    for (;;) {
+      std::vector<uint16_t> current;
+      current.reserve(levelsDeep);
+
+      this->lightDiagram_->reset();
+
+      std::cout << "Trying level " << levelsDeep << std::endl;
+
+      if (tryJoltageAtDepthNonDecreasing(*this->lightDiagram_, this->buttonSchematics_,
+                                            levelsDeep, 0, current)) {
+        // Sanity check here
+        for (const auto &buttonIndex: current) {
+          ButtonSchematic schematic = this->buttonSchematics_[buttonIndex];
+          this->lightDiagram_->unpressButtons(schematic);
+        }
+        for (const auto state: this->lightDiagram_->getJoltageState()) {
+          if (state != 0) {
+            throw core::AocException("Machine is not reset");
+          }
+        }
+
+        return current;
+      }
+
+      ++levelsDeep;
     }
   }
 
@@ -58,7 +119,7 @@ namespace D10 {
       }
     }
 
-    this->diagram = std::make_unique<LightDiagram>(firstGroup, thirdGroup);
+    this->lightDiagram_ = std::make_unique<LightDiagram>(firstGroup, thirdGroup);
     for (const auto &buttonPattern: secondGroup) {
       this->buttonSchematics_.emplace_back(buttonPattern);
     }
@@ -70,11 +131,11 @@ namespace D10 {
   }
   std::vector<uint16_t> LightMachine::findFewestPresses() const {
     std::vector<uint16_t> buttonsPressed;
-    this->diagram->reset();
+    this->lightDiagram_->reset();
     int levelsDeep = 0;
     bool found = false;
     while (!found) {
-      this->diagram->reset();
+      this->lightDiagram_->reset();
       levelsDeep++;
       if (recursiveFindFewestPresses(buttonsPressed, 0, levelsDeep)) {
         found = true;
@@ -84,63 +145,15 @@ namespace D10 {
     // Sanity check here
     for (const auto &buttonIndex: buttonsPressed) {
       ButtonSchematic schematic = this->buttonSchematics_[buttonIndex];
-      this->diagram->pressButtons(schematic);
+      this->lightDiagram_->pressButtons(schematic);
     }
-    for (const auto state: this->diagram->getState()) {
+    for (const auto state: this->lightDiagram_->getState()) {
       if (state) {
         throw core::AocException("Machine is not reset");
       }
     }
 
     return buttonsPressed;
-  }
-  std::vector<uint16_t> LightMachine::findFewestJoltagePresses() const {
-    this->diagram->reset();
-    int levelsDeep = 1;
-    bool found = false;
-
-    using PatternMap = std::unordered_map<std::vector<uint16_t>, std::vector<uint32_t>, VecU16Hash>;
-
-    std::vector<uint16_t> fewestButtonPressed;
-    PatternMap rememberedPatterns;
-    while (!found) {
-      PatternMap newPatterns;
-      std::vector<std::vector<uint16_t>> buttonVariationsToTry;
-      std::vector<uint16_t> current;
-      current.reserve(1);
-      genVariationsNonDecreasing(this->buttonSchematics_.size(), levelsDeep, 0, current, buttonVariationsToTry);
-
-      std::cout << "Trying level " << levelsDeep << " with " << buttonVariationsToTry.size() << " variations"
-                << std::endl;
-
-      this->diagram->reset();
-      levelsDeep++;
-
-      fewestButtonPressed =
-          findFewestJoltagePressesThroughAllVariations(buttonVariationsToTry, rememberedPatterns, newPatterns);
-      if (!fewestButtonPressed.empty()) {
-        found = true;
-      }
-
-      // Swap remembered patterns with new ones as they have been updated
-      rememberedPatterns = std::move(newPatterns);
-    }
-
-    // Sanity check here
-    for (const auto &buttonIndex: fewestButtonPressed) {
-      ButtonSchematic schematic = this->buttonSchematics_[buttonIndex];
-      this->diagram->unpressButtons(schematic);
-    }
-    for (const auto state: this->diagram->getJoltageState()) {
-      if (state != 0) {
-        throw core::AocException("Machine is not reset");
-      }
-    }
-
-
-    rememberedPatterns.clear();
-
-    return fewestButtonPressed;
   }
   void LightMachine::printButtons(std::vector<uint16_t> buttonsPressed) const {
     for (const auto &buttonIdx: buttonsPressed) {
@@ -161,56 +174,43 @@ namespace D10 {
       auto buttonToPressThisIteration = this->buttonSchematics_[i];
       // Press button
       // Add button reference to buttons pressed
-      this->diagram->pressButtons(buttonToPressThisIteration);
+      this->lightDiagram_->pressButtons(buttonToPressThisIteration);
       buttonsPressed.push_back(i);
 
-      if (this->diagram->isValid() || recursiveFindFewestPresses(buttonsPressed, currentLevel + 1, maximumLevel)) {
+      if (this->lightDiagram_->isValid() || recursiveFindFewestPresses(buttonsPressed, currentLevel + 1, maximumLevel)) {
         return true;
       }
 
       // Press same buttons again to "undo"
       // Remove last button pressed
-      this->diagram->pressButtons(buttonToPressThisIteration);
+      this->lightDiagram_->pressButtons(buttonToPressThisIteration);
       buttonsPressed.pop_back();
     }
 
     return false;
   }
   std::vector<uint16_t> LightMachine::findFewestJoltagePressesThroughAllVariations(
-      const std::vector<std::vector<uint16_t>> &buttonPressesToTry,
-      const std::unordered_map<std::vector<uint16_t>, std::vector<uint32_t>, VecU16Hash> &previousPatterns,
-      std::unordered_map<std::vector<uint16_t>, std::vector<uint32_t>, VecU16Hash> &newPatterns) const {
+      const std::vector<std::vector<uint16_t>> &buttonPressesToTry) const {
     std::vector<uint16_t> empty;
 
     // Loop through current ones so far
     for (const auto &currentVariation: buttonPressesToTry) {
 
       // Reset at beginning
-      this->diagram->reset();
+      this->lightDiagram_->reset();
 
-      // Set joltage from previous checks
-      if (!previousPatterns.empty()) {
-        std::vector<uint16_t> previousCheck = currentVariation;
-        previousCheck.pop_back();
 
-        if (auto it = previousPatterns.find(previousCheck); it != previousPatterns.end()) {
-          std::vector<uint32_t> previousState = it->second;
-          this->diagram->setJoltageState(previousState);
-        }
+      // Press all buttons
+      for (const auto &buttonIdx: currentVariation) {
+        this->lightDiagram_->pressButtons(this->buttonSchematics_[buttonIdx]);
       }
 
-      // Press last button
-      uint16_t lastButton = currentVariation.back();
-      this->diagram->pressButtons(this->buttonSchematics_[lastButton]);
-
       // Is diagram now valid?
-      if (this->diagram->isValidJoltage()) {
+      if (this->lightDiagram_->isValidJoltage()) {
         // If valid, return the winning variation
         return currentVariation;
       }
 
-      // Cache state of diagram for this full variation
-      newPatterns.try_emplace(currentVariation, this->diagram->getJoltageState());
     }
 
     return empty;
