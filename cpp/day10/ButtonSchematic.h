@@ -13,6 +13,7 @@ namespace D10 {
   public:
     ButtonSchematic(const std::string &input);
     ButtonSchematic(const std::vector<uint8_t> &input);
+    std::string toString() const;
     std::vector<uint8_t> getButtons() const {
       return buttons;
     }

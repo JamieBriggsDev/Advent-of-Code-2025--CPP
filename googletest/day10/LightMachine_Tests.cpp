@@ -143,14 +143,41 @@ TEST(LightMachine_Tests, ShouldFindFewestJoltageSimpleTwoNumbersMore) {
   ASSERT_EQ(result.size(), 6);
 }
 
-/*TEST(LightMachine_Tests, ShouldFindFewestJoltageExampleOne) {
+TEST(LightMachine_Tests, ShouldFindFewestJoltageExampleOne) {
   // Given
   std::string input = "[.##.] (3) (1,3) (2) (2,3) (0,2) (0,1) {3,5,4,7}";
   const D10::LightMachine lightMachine(input);
   // When
   auto result = lightMachine.findFewestJoltagePresses();
+  // 3 once YES
+  // 1,3 three times NO
+  // 2,3 three times NO
+  // 0,2 once
+  // 0,1 twice
+  lightMachine.printButtons(result);
   // Then
   ASSERT_EQ(result.size(), 10);
-  ASSERT_EQ(result[0], 2);
-  ASSERT_EQ(result[1], 3);
-}*/
+}
+
+
+TEST(LightMachine_Tests, ShouldFindFewestJoltageExampleTwo) {
+  // Given
+  std::string input = "[...#.] (0,2,3,4) (2,3) (0,4) (0,1,2) (1,2,3,4) {7,5,12,7,2}";
+  const D10::LightMachine lightMachine(input);
+  // When
+  auto result = lightMachine.findFewestJoltagePresses();
+  lightMachine.printButtons(result);
+  // Then
+  ASSERT_EQ(result.size(), 12);
+}
+
+TEST(LightMachine_Tests, ShouldFindFewestJoltageExampleThree) {
+  // Given
+  std::string input = "[.###.#] (0,1,2,3,4) (0,3,4) (0,1,2,4,5) (1,2) {10,11,11,5,10,5}";
+  const D10::LightMachine lightMachine(input);
+  // When
+  auto result = lightMachine.findFewestJoltagePresses();
+  lightMachine.printButtons(result);
+  // Then
+  ASSERT_EQ(result.size(), 11);
+}

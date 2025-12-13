@@ -18,4 +18,11 @@ namespace D10 {
   ButtonSchematic::ButtonSchematic(const std::vector<uint8_t> &input) {
     buttons = input;
   }
+  std::string ButtonSchematic::toString() const {
+    std::stringstream ss;
+    for (const auto button: buttons) {
+      ss << static_cast<int>(button) << ",";
+    }
+    return ss.str();
+  }
 } // namespace D10

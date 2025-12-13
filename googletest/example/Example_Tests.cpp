@@ -210,3 +210,13 @@ TEST_F(Example_Tests, Day10_Part1) {
   // Then
   EXPECT_EQ(result, "7");
 }
+
+TEST_F(Example_Tests, Day10_Part2) {
+  // Given
+  const auto input = getTestInput("testData/day10.txt");
+  Day10 day;
+  // When
+  const auto result = day.solvePartTwo(input);
+  // Then
+  EXPECT_EQ(result, "33");
+}
