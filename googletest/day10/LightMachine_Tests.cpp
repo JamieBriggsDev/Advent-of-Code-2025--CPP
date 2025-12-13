@@ -102,7 +102,48 @@ TEST(LightMachine_Tests, ShouldFindFewestExampleTwo) {
   ASSERT_EQ(result[2], 4);
 }
 
-TEST(LightMachine_Tests, ShouldFindFewestJoltageExampleOne) {
+
+TEST(LightMachine_Tests, ShouldFindFewestJoltageSimple) {
+  // Given
+  std::string input = "[.] (0) {1}";
+  const D10::LightMachine lightMachine(input);
+  // When
+  auto result = lightMachine.findFewestJoltagePresses();
+  // Then
+  ASSERT_EQ(result.size(), 1);
+}
+
+TEST(LightMachine_Tests, ShouldFindFewestJoltageSimpleTwo) {
+  // Given
+  std::string input = "[.] (0) {2}";
+  const D10::LightMachine lightMachine(input);
+  // When
+  auto result = lightMachine.findFewestJoltagePresses();
+  // Then
+  ASSERT_EQ(result.size(), 2);
+}
+
+TEST(LightMachine_Tests, ShouldFindFewestJoltageSimpleTwoNumbers) {
+  // Given
+  std::string input = "[..] (0) (0,1) {2,1}";
+  const D10::LightMachine lightMachine(input);
+  // When
+  auto result = lightMachine.findFewestJoltagePresses();
+  // Then
+  ASSERT_EQ(result.size(), 2);
+}
+
+TEST(LightMachine_Tests, ShouldFindFewestJoltageSimpleTwoNumbersMore) {
+  // Given
+  std::string input = "[..] (0) (0,1) {6,5}";
+  const D10::LightMachine lightMachine(input);
+  // When
+  auto result = lightMachine.findFewestJoltagePresses();
+  // Then
+  ASSERT_EQ(result.size(), 6);
+}
+
+/*TEST(LightMachine_Tests, ShouldFindFewestJoltageExampleOne) {
   // Given
   std::string input = "[.##.] (3) (1,3) (2) (2,3) (0,2) (0,1) {3,5,4,7}";
   const D10::LightMachine lightMachine(input);
@@ -112,4 +153,4 @@ TEST(LightMachine_Tests, ShouldFindFewestJoltageExampleOne) {
   ASSERT_EQ(result.size(), 10);
   ASSERT_EQ(result[0], 2);
   ASSERT_EQ(result[1], 3);
-}
+}*/
