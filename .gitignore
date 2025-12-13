@@ -42,6 +42,7 @@
 .idea/vcs.xml
 .idea/jsLibraryMappings.xml
 .idea/misc.xml
+.idea/shelf
 
 # Sensitive or high-churn files:
 .idea/dataSources.ids
