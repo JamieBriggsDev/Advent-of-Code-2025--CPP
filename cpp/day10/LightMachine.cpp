@@ -9,6 +9,7 @@
 #include <map>
 #include <ranges>
 #include <regex>
+#include <unordered_map>
 
 #include "../core/AocException.h"
 
@@ -57,7 +58,7 @@ namespace D10 {
       }
     }
 
-    this->diagram = new LightDiagram(firstGroup, thirdGroup);
+    this->diagram = std::make_unique<LightDiagram>(firstGroup, thirdGroup);
     for (const auto &buttonPattern: secondGroup) {
       this->buttonSchematics_.emplace_back(buttonPattern);
     }
@@ -98,11 +99,12 @@ namespace D10 {
     int levelsDeep = 1;
     bool found = false;
 
+    using PatternMap = std::unordered_map<std::vector<uint16_t>, std::vector<uint32_t>, VecU16Hash>;
 
     std::vector<uint16_t> fewestButtonPressed;
-    std::map<std::vector<uint16_t>, std::vector<u_int32_t>> rememberedPatterns;
+    PatternMap rememberedPatterns;
     while (!found) {
-      std::map<std::vector<uint16_t>, std::vector<u_int32_t>> newPatterns;
+      PatternMap newPatterns;
       std::vector<std::vector<uint16_t>> buttonVariationsToTry;
       std::vector<uint16_t> current;
       current.reserve(1);
@@ -110,8 +112,10 @@ namespace D10 {
 
       std::cout << "Trying level " << levelsDeep << " with " << buttonVariationsToTry.size() << " variations"
                 << std::endl;
+
       this->diagram->reset();
       levelsDeep++;
+
       fewestButtonPressed =
           findFewestJoltagePressesThroughAllVariations(buttonVariationsToTry, rememberedPatterns, newPatterns);
       if (!fewestButtonPressed.empty()) {
@@ -119,7 +123,7 @@ namespace D10 {
       }
 
       // Swap remembered patterns with new ones as they have been updated
-      rememberedPatterns = newPatterns;
+      rememberedPatterns = std::move(newPatterns);
     }
 
     // Sanity check here
@@ -132,6 +136,9 @@ namespace D10 {
         throw core::AocException("Machine is not reset");
       }
     }
+
+
+    rememberedPatterns.clear();
 
     return fewestButtonPressed;
   }
@@ -171,8 +178,8 @@ namespace D10 {
   }
   std::vector<uint16_t> LightMachine::findFewestJoltagePressesThroughAllVariations(
       const std::vector<std::vector<uint16_t>> &buttonPressesToTry,
-      std::map<std::vector<uint16_t>, std::vector<uint32_t>> previousPatterns,
-      std::map<std::vector<uint16_t>, std::vector<uint32_t>> &newPatterns) const {
+      const std::unordered_map<std::vector<uint16_t>, std::vector<uint32_t>, VecU16Hash> &previousPatterns,
+      std::unordered_map<std::vector<uint16_t>, std::vector<uint32_t>, VecU16Hash> &newPatterns) const {
     std::vector<uint16_t> empty;
 
     // Loop through current ones so far
@@ -186,14 +193,15 @@ namespace D10 {
         std::vector<uint16_t> previousCheck = currentVariation;
         previousCheck.pop_back();
 
-        std::vector<uint32_t> previousState = previousPatterns[previousCheck];
-        this->diagram->setJoltageState(previousState);
+        if (auto it = previousPatterns.find(previousCheck); it != previousPatterns.end()) {
+          std::vector<uint32_t> previousState = it->second;
+          this->diagram->setJoltageState(previousState);
+        }
       }
 
       // Press last button
       uint16_t lastButton = currentVariation.back();
-      auto buttonsToPress = this->buttonSchematics_[lastButton];
-      this->diagram->pressButtons(buttonsToPress);
+      this->diagram->pressButtons(this->buttonSchematics_[lastButton]);
 
       // Is diagram now valid?
       if (this->diagram->isValidJoltage()) {
@@ -201,11 +209,8 @@ namespace D10 {
         return currentVariation;
       }
 
-      // Cache state of diagram
-      newPatterns[currentVariation] = this->diagram->getJoltageState();
-
-      // Reset the diagram if it wasn't found
-      this->diagram->reset();
+      // Cache state of diagram for this full variation
+      newPatterns.try_emplace(currentVariation, this->diagram->getJoltageState());
     }
 
     return empty;

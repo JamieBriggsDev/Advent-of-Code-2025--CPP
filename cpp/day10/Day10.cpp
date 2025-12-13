@@ -6,6 +6,7 @@
 
 #include <iostream>
 #include <ostream>
+#include <sys/resource.h>
 
 #include "LightMachine.h"
 
@@ -33,9 +34,15 @@ namespace solutions {
     std::cout << "Total machines: " << lightMachines.size() << std::endl;
     int idx = 0;
     for (const auto &machine: lightMachines) {
+      struct rusage usage{};
+      getrusage(RUSAGE_SELF, &usage);
+      std::cout << "Memory used: " << usage.ru_maxrss / 1024.0 << " MB" << std::endl;
+
+
       std::cout << "Machine: " << idx++ << std::endl;
       auto fewestPresses = machine.findFewestJoltagePresses();
       finalTotal += fewestPresses.size();
+
     }
 
     return std::to_string(finalTotal);
