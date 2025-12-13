@@ -13,6 +13,7 @@
 #include "../../cpp/day7/Day07.h"
 #include "../../cpp/day8/Day08.h"
 #include "../../cpp/day9/Day09.h"
+#include "../../cpp/day10/Day10.h"
 #include "../../cpp/helper/AOCInitializer.h"
 #include "../../cpp/helper/SolutionInput.h"
 #include "gtest/gtest.h"
@@ -198,3 +199,24 @@ TEST_F(Example_Tests, Day9_Part1) {
   // Then
   EXPECT_EQ(result, "24");
 }*/
+
+
+TEST_F(Example_Tests, Day10_Part1) {
+  // Given
+  const auto input = getTestInput("testData/day10.txt");
+  Day10 day;
+  // When
+  const auto result = day.solvePartOne(input);
+  // Then
+  EXPECT_EQ(result, "7");
+}
+
+TEST_F(Example_Tests, Day10_Part2) {
+  // Given
+  const auto input = getTestInput("testData/day10.txt");
+  Day10 day;
+  // When
+  const auto result = day.solvePartTwo(input);
+  // Then
+  EXPECT_EQ(result, "33");
+}
