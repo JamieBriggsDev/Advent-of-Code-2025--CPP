@@ -13,8 +13,8 @@ namespace D10 {
   class LightDiagram {
     std::vector<bool> state;
     std::vector<bool> goal;
-    std::vector<u_int32_t> joltageState;
-    std::vector<u_int32_t> joltageGoal;
+    std::vector<uint64_t> joltageState;
+    std::vector<uint64_t> joltageGoal;
   public:
     LightDiagram(std::string &input);
     LightDiagram(std::string &input, std::string &joltageInput);
@@ -26,14 +26,14 @@ namespace D10 {
     std::vector<bool> getGoal() const {
       return goal;
     }
-    std::vector<u_int32_t> getJoltageState() const {
+    std::vector<uint64_t> getJoltageState() const {
       return joltageState;
     }
-    void setJoltageState(const std::vector<u_int32_t> &joltageState) {
+    void setJoltageState(const std::vector<uint64_t> &joltageState) {
       this->joltageState = joltageState;
     }
 
-    std::vector<u_int32_t> getJoltageGoal() const {
+    std::vector<uint64_t> getJoltageGoal() const {
       return joltageGoal;
     }
     void reset();

@@ -27,15 +27,13 @@ namespace D10 {
 
     bool recursiveFindFewestPresses(std::vector<uint16_t> &buttonsPressed, uint16_t currentLevel,
                                     uint16_t maximumLevel) const;
-    std::vector<uint16_t> findFewestJoltagePressesThroughAllVariations(
-        const std::vector<std::vector<uint16_t>> &buttonPressesToTry) const;
 
   public:
-    LightMachine(const std::string &input);
-    LightDiagram getDiagram() const { return *lightDiagram_; }
-    std::vector<ButtonSchematic> getButtonSchematics() const { return buttonSchematics_; }
-    std::vector<uint16_t> findFewestPresses() const;
-    std::vector<uint16_t> findFewestJoltagePresses() const;
+    explicit LightMachine(const std::string &input);
+    [[nodiscard]] LightDiagram getDiagram() const { return *lightDiagram_; }
+    [[nodiscard]] std::vector<ButtonSchematic> getButtonSchematics() const { return buttonSchematics_; }
+    [[nodiscard]] std::vector<uint16_t> findFewestPresses() const;
+    [[nodiscard]] std::vector<uint16_t> findFewestJoltagePresses() const;
     void printButtons(std::vector<uint16_t> buttonsPressed) const;
   };
 
